@@ -1,5 +1,5 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
   title?: string;
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const {
-  title = "L'Atelier — Couturière sur mesure",
+  title = "CréatiClo — Couturière sur mesure",
   description = "Retouches, confection et réparations sur mesure. Découvrez le savoir-faire artisanal de notre atelier.",
 } = Astro.props;
 ---
@@ -20,6 +20,9 @@ const {
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Faculty+Glyphic&display=swap" rel="stylesheet"/>
     <title>{title}</title>
   </head>
   <body class="antialiased text-neutral-800 bg-white">

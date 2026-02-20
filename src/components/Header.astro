@@ -1,34 +1,90 @@
 ---
 const navLinks = [
-    { label: "Accueil", href: "#hero" },
-    { label: "À propos", href: "#about" },
-    { label: "Services", href: "#services" },
-    { label: "Galerie", href: "#gallery" },
-    { label: "Contact", href: "#contact" },
+  { label: "Accueil", href: "#hero" },
+  { label: "À propos", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Galerie", href: "#gallery" },
+  { label: "Contact", href: "#contact" },
 ];
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-100">
-    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-        <!-- Logo -->
-        <a href="/" class="font-serif text-xl text-neutral-800 tracking-wide">
-            CreatiClo
-        </a>
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
 
-        <!-- Navigation -->
-        <nav class="hidden md:flex items-center gap-8">
-            {
-                navLinks.map(({ label, href }) => (
-                    <a href={href} class="text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200">
-                        {label}
-                    </a>
-                ))
-            }
-        </nav>
+    <!-- Logo -->
+    <a href="/" class="text-xl tracking-wide">
+      <span class="font-[Parisienne] text-2xl">Créati</span><span class="font-[Faculty_Glyphic]">clo</span>
+    </a>
 
-        <!-- CTA -->
-        <a href="#contact" class="hidden md:block bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-2 rounded-full transition-colors duration-200">
-            Prendre rendez-vous
+    <!-- Navigation desktop -->
+    <nav class="hidden md:flex items-center gap-8">
+      {navLinks.map(({ label, href }) => (
+        <a href={href} class="text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200">
+          {label}
         </a>
-    </div>
+      ))}
+    </nav>
+
+    <!-- CTA desktop -->
+    <a href="#contact" class="hidden md:block bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-2 rounded-full transition-colors duration-200">
+      Prendre rendez-vous
+    </a>
+
+    <!-- Burger -->
+    <button id="burger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+      <span class="w-6 h-0.5 bg-neutral-800 transition-all duration-300" id="burger-1"></span>
+      <span class="w-6 h-0.5 bg-neutral-800 transition-all duration-300" id="burger-2"></span>
+      <span class="w-6 h-0.5 bg-neutral-800 transition-all duration-300" id="burger-3"></span>
+    </button>
+
+  </div>
+
+  <!-- Menu mobile -->
+  <div id="mobile-menu" class="hidden md:hidden flex-col bg-white border-t border-neutral-100 px-6 py-4 gap-4">
+    {navLinks.map(({ label, href }) => (
+      <a href={href} class="mobile-link text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200 py-2">
+        {label}
+      </a>
+    ))}
+    <a href="#contact" class="mobile-link bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-3 rounded-full text-center transition-colors duration-200 mt-2">
+      Prendre rendez-vous
+    </a>
+  </div>
 </header>
+
+<script>
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("mobile-menu");
+  const b1 = document.getElementById("burger-1");
+  const b2 = document.getElementById("burger-2");
+  const b3 = document.getElementById("burger-3");
+
+  burger?.addEventListener("click", () => {
+    const isOpen = !menu?.classList.contains("hidden");
+
+    if (isOpen) {
+      menu?.classList.add("hidden");
+      menu?.classList.remove("flex");
+      b1!.style.transform = "rotate(0deg) translateY(0)";
+      b2!.style.opacity = "1";
+      b3!.style.transform = "rotate(0deg) translateY(0)";
+    } else {
+      menu?.classList.remove("hidden");
+      menu?.classList.add("flex");
+      b1!.style.transform = "rotate(45deg) translateY(8px)";
+      b2!.style.opacity = "0";
+      b3!.style.transform = "rotate(-45deg) translateY(-8px)";
+    }
+  });
+
+  // Ferme le menu au clic sur un lien
+  document.querySelectorAll(".mobile-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu?.classList.add("hidden");
+      menu?.classList.remove("flex");
+      b1!.style.transform = "rotate(0deg) translateY(0)";
+      b2!.style.opacity = "1";
+      b3!.style.transform = "rotate(0deg) translateY(0)";
+    });
+  });
+</script>

@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+:root {
+  --font-parisienne: 'Parisienne', cursive;
+  --font-limelight: 'Limelight', sans-serif;
+}
