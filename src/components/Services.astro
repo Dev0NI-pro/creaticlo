@@ -8,6 +8,9 @@ const services = [
       "Cintrage et ajustement",
       "Remplacement de fermeture",
       "Réparation de doublure",
+      "Ajustement d'épaules",
+      "Reprise de col",
+      "Modification de manches",
     ],
   },
   {
@@ -18,19 +21,27 @@ const services = [
       "Tenue de soirée",
       "Vêtements du quotidien",
       "Costumes et uniformes",
+      "Robes de demoiselles d'honneur",
+      "Tenues de baptême",
+      "Pièces uniques sur croquis",
     ],
   },
   {
-    title: "Réparations Patrimoiniales",
+    title: "Réparations Patrimoniales",
     description: "Redonnez vie à vos pièces vintage ou abîmées. Nous restaurons avec respect et expertise.",
     items: [
       "Restauration de vêtements anciens",
       "Réparation de dentelle",
       "Renforcement de tissus fragiles",
       "Remplacement de boutons",
+      "Stoppage et reprises invisibles",
+      "Traitement des taches anciennes",
+      "Conservation de pièces de famille",
     ],
   },
 ];
+
+const VISIBLE_COUNT = 4;
 ---
 
 <section id="services" class="py-24 bg-white">
@@ -50,24 +61,74 @@ const services = [
     </div>
 
     <!-- Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {services.map(({ title, description, items }) => (
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+      {services.map(({ title, description, items }, index) => (
         <div class="bg-pink-50 rounded-2xl p-8 flex flex-col gap-6">
           <div class="flex flex-col gap-3">
             <h3 class="text-xl font-serif text-neutral-800">{title}</h3>
             <p class="text-neutral-500 text-sm leading-relaxed">{description}</p>
           </div>
+
           <ul class="flex flex-col gap-2">
-            {items.map((item) => (
+            {items.slice(0, VISIBLE_COUNT).map((item) => (
               <li class="flex items-center gap-2 text-sm text-neutral-600">
                 <span class="w-1.5 h-1.5 rounded-full bg-pink-400 shrink-0"></span>
                 {item}
               </li>
             ))}
+
+            <!-- Items cachés -->
+            <div data-extra={index} class="flex flex-col gap-2 hidden">
+              {items.slice(VISIBLE_COUNT).map((item) => (
+                <li class="flex items-center gap-2 text-sm text-neutral-600">
+                  <span class="w-1.5 h-1.5 rounded-full bg-pink-400 shrink-0"></span>
+                  {item}
+                </li>
+              ))}
+              <li class="flex items-center gap-2 text-sm text-neutral-400 italic">
+                <span class="w-1.5 h-1.5 rounded-full bg-pink-200 shrink-0"></span>
+                Et bien plus encore...
+              </li>
+            </div>
           </ul>
+
+          <!-- Bouton accordion -->
+          <button
+            data-toggle={index}
+            class="flex items-center gap-2 text-xs text-pink-500 hover:text-pink-600 font-medium tracking-wide transition-colors duration-200 w-fit"
+          >
+            <span data-label={index}>Voir toutes les prestations</span>
+            <span data-arrow={index} class="transition-transform duration-300">↓</span>
+          </button>
+
         </div>
       ))}
     </div>
 
   </div>
 </section>
+
+<script>
+  document.querySelectorAll("[data-toggle]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const index = btn.getAttribute("data-toggle");
+      const extra = document.querySelector(`[data-extra="${index}"]`);
+      const label = document.querySelector(`[data-label="${index}"]`);
+      const arrow = document.querySelector(`[data-arrow="${index}"]`);
+
+      if (!extra || !label || !arrow) return;
+
+      const isOpen = !extra.classList.contains("hidden");
+
+      if (isOpen) {
+        extra.classList.add("hidden");
+        label.textContent = "Voir toutes les prestations";
+        (arrow as HTMLElement).style.transform = "rotate(0deg)";
+      } else {
+        extra.classList.remove("hidden");
+        label.textContent = "Réduire";
+        (arrow as HTMLElement).style.transform = "rotate(180deg)";
+      }
+    });
+  });
+</script>
