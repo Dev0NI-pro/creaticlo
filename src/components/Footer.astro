@@ -1,0 +1,57 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const links = [
+  { label: "Accueil", href: "#hero" },
+  { label: "À propos", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Galerie", href: "#gallery" },
+  { label: "Contact", href: "#contact" },
+];
+
+const socials = [
+  { icon: "mdi:instagram", href: "#", label: "Instagram" },
+  { icon: "mdi:facebook", href: "#", label: "Facebook" },
+  { icon: "mdi:pinterest", href: "#", label: "Pinterest" },
+];
+---
+
+<footer class="bg-neutral-800 text-neutral-400 py-8">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col gap-6">
+
+    <!-- Top -->
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+
+      <!-- Brand -->
+      <a href="/" class="font-serif text-lg text-white tracking-wide">
+        L'Atelier
+      </a>
+
+      <!-- Navigation -->
+      <nav class="flex items-center gap-6">
+        {links.map(({ label, href }) => (
+          <a href={href} class="text-sm hover:text-pink-400 transition-colors duration-200">
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Réseaux sociaux -->
+      <div class="flex items-center gap-4">
+        {socials.map(({ icon, href, label }) => (
+          <a href={href} aria-label={label} class="hover:text-pink-400 transition-colors duration-200">
+            <Icon name={icon} class="w-5 h-5" />
+          </a>
+        ))}
+      </div>
+
+    </div>
+
+    <!-- Bottom -->
+    <div class="border-t border-neutral-700 pt-6 flex flex-col md:flex-row items-center justify-between gap-2">
+      <p class="text-xs">© {new Date().getFullYear()} L'Atelier. Tous droits réservés.</p>
+      <p class="text-xs">Fait avec soin à Paris.</p>
+    </div>
+
+  </div>
+</footer>

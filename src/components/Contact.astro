@@ -1,0 +1,123 @@
+---
+const infos = [
+    { label: "Adresse", value: "1350 Rte de Pignière, 38300 Tramolé" },
+    { label: "Téléphone", value: "+33 1 23 45 67 89" },
+    { label: "Email", value: "contact@latelier.fr" },
+    { label: "Horaires", value: "Lun — Sam, 9h00 — 19h00" },
+];
+---
+
+<section id="contact" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16">
+        <!-- Formulaire -->
+        <div class="flex flex-col gap-8">
+            <div class="flex flex-col gap-4">
+                <span
+                    class="text-pink-500 text-sm font-medium tracking-widest uppercase"
+                >
+                    Nous contacter
+                </span>
+                <h2 class="text-4xl font-serif text-neutral-800">
+                    Demander un Essayage
+                </h2>
+                <p class="text-neutral-500 leading-relaxed">
+                    Décrivez nous votre projet en quelques mots. Nous vous
+                    recontacterons sous 48 heures.
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm text-neutral-600">Prénom</label>
+                        <input
+                            type="text"
+                            placeholder="Marie"
+                            class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 placeholder:text-neutral-300 focus:outline-none focus:border-pink-400 transition-colors"
+                        />
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm text-neutral-600">Nom</label>
+                        <input
+                            type="text"
+                            placeholder="Dupont"
+                            class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 placeholder:text-neutral-300 focus:outline-none focus:border-pink-400 transition-colors"
+                        />
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm text-neutral-600">Email</label>
+                    <input
+                        type="email"
+                        placeholder="marie@exemple.fr"
+                        class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 placeholder:text-neutral-300 focus:outline-none focus:border-pink-400 transition-colors"
+                    />
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm text-neutral-600"
+                        >Type de projet</label
+                    >
+                    <select
+                        class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 focus:outline-none focus:border-pink-400 transition-colors"
+                    >
+                        <option value="">Sélectionnez un service</option>
+                        <option value="retouche">Retouche</option>
+                        <option value="mesure">Confection sur mesure</option>
+                        <option value="reparation">Réparation</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm text-neutral-600">Message</label>
+                    <textarea
+                        placeholder="Décrivez votre projet..."
+                        rows="4"
+                        class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 placeholder:text-neutral-300 focus:outline-none focus:border-pink-400 transition-colors resize-none"
+                    ></textarea>
+                </div>
+
+                <button
+                    type="button"
+                    class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full text-sm transition-colors duration-200 w-fit"
+                >
+                    Envoyer ma demande →
+                </button>
+            </div>
+        </div>
+
+        <!-- Infos -->
+        <div class="flex flex-col gap-8">
+            <div class="bg-pink-50 rounded-2xl p-8 flex flex-col gap-6">
+                <h3 class="text-xl font-serif text-neutral-800">Le Studio</h3>
+                <div class="flex flex-col gap-4">
+                    {
+                        infos.map(({ label, value }) => (
+                            <div class="flex flex-col gap-1">
+                                <span class="text-xs text-pink-500 font-medium tracking-widest uppercase">
+                                    {label}
+                                </span>
+                                <span class="text-sm text-neutral-600">
+                                    {value}
+                                </span>
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <!-- Google Maps -->
+                <div class="rounded-xl overflow-hidden h-75">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.2268566271714!2d5.252728376608312!3d45.505511730680844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478b2a2771ee80e1%3A0xb3206a14f8fc224b!2s1350%20Rte%20de%20Pigni%C3%A8re%2C%2038300%20Tramol%C3%A9!5e0!3m2!1sfr!2sfr!4v1771597896384!5m2!1sfr!2sfr"
+                        width="600"
+                        height="450"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

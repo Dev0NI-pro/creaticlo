@@ -1,0 +1,73 @@
+---
+const services = [
+  {
+    title: "Retouches de Précision",
+    description: "Ourlets, cintrage, ajustement de bretelles... Chaque retouche est réalisée avec soin pour un résultat parfait.",
+    items: [
+      "Ourlets pantalon et robe",
+      "Cintrage et ajustement",
+      "Remplacement de fermeture",
+      "Réparation de doublure",
+    ],
+  },
+  {
+    title: "Confection sur Mesure",
+    description: "Créez la pièce de vos rêves. Nous concevons ensemble votre vêtement de A à Z selon vos envies.",
+    items: [
+      "Robe de mariée sur mesure",
+      "Tenue de soirée",
+      "Vêtements du quotidien",
+      "Costumes et uniformes",
+    ],
+  },
+  {
+    title: "Réparations Patrimoiniales",
+    description: "Redonnez vie à vos pièces vintage ou abîmées. Nous restaurons avec respect et expertise.",
+    items: [
+      "Restauration de vêtements anciens",
+      "Réparation de dentelle",
+      "Renforcement de tissus fragiles",
+      "Remplacement de boutons",
+    ],
+  },
+];
+---
+
+<section id="services" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col gap-16">
+
+    <!-- Titre -->
+    <div class="text-center flex flex-col gap-4">
+      <span class="text-pink-500 text-sm font-medium tracking-widest uppercase">
+        Ce que nous faisons
+      </span>
+      <h2 class="text-4xl font-serif text-neutral-800">
+        Tailleur pour votre Quotidien
+      </h2>
+      <p class="text-neutral-500 max-w-xl mx-auto leading-relaxed">
+        Nos maîtres couturières sont à votre disposition pour vous accompagner dans tous vos projets de taille.
+      </p>
+    </div>
+
+    <!-- Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {services.map(({ title, description, items }) => (
+        <div class="bg-pink-50 rounded-2xl p-8 flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <h3 class="text-xl font-serif text-neutral-800">{title}</h3>
+            <p class="text-neutral-500 text-sm leading-relaxed">{description}</p>
+          </div>
+          <ul class="flex flex-col gap-2">
+            {items.map((item) => (
+              <li class="flex items-center gap-2 text-sm text-neutral-600">
+                <span class="w-1.5 h-1.5 rounded-full bg-pink-400 shrink-0"></span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
