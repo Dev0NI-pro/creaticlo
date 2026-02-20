@@ -1,0 +1,34 @@
+---
+const navLinks = [
+    { label: "Accueil", href: "#hero" },
+    { label: "À propos", href: "#about" },
+    { label: "Services", href: "#services" },
+    { label: "Galerie", href: "#gallery" },
+    { label: "Contact", href: "#contact" },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-100">
+    <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="/" class="font-serif text-xl text-neutral-800 tracking-wide">
+            JE L'Atelier
+        </a>
+
+        <!-- Navigation -->
+        <nav class="hidden md:flex items-center gap-8">
+            {
+                navLinks.map(({ label, href }) => (
+                    <a href={href} class="text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200">
+                        {label}
+                    </a>
+                ))
+            }
+        </nav>
+
+        <!-- CTA -->
+        <a href="#contact" class="hidden md:block bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-2 rounded-full transition-colors duration-200">
+            Prendre rendez-vous
+        </a>
+    </div>
+</header>
