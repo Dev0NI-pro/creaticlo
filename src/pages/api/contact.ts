@@ -74,7 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
         
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 40px;">
-          <img src="https://creaticlo.netlify.app/logo.svg" alt="Creaticlo" style="height: 48px;" />
+          <img src="https://creaticlo.netlify.app/logo-mail.png" alt="Creaticlo" style="height: 48px;" />
           <p style="color: #a3a3a3; font-size: 12px; text-transform: uppercase; letter-spacing: 3px; margin-top: 8px;">Atelier de couture</p>
         </div>
 
