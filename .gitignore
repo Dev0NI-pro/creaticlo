@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 #vscode setting
 .vscode/
+# Local Netlify folder
+.netlify
