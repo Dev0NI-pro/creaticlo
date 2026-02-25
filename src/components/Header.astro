@@ -8,45 +8,74 @@ const navLinks = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-100">
+<header
+  class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-sm border-b border-neutral-100"
+>
   <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-
     <!-- Logo -->
-    <a href="/" class="text-xl tracking-wide">
-      <span class="font-[Parisienne] text-2xl">Créati'</span><span class="font-[Limelight]">Clo</span>
+    <a href="/">
+      <img src="/logo.svg" alt="Creaticlo" class="h-6">
     </a>
 
     <!-- Navigation desktop -->
     <nav class="hidden md:flex items-center gap-8">
-      {navLinks.map(({ label, href }) => (
-        <a href={href} class="text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200">
-          {label}
-        </a>
-      ))}
+      {
+        navLinks.map(({ label, href }) => (
+          <a
+            href={href}
+            class="text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200"
+          >
+            {label}
+          </a>
+        ))
+      }
     </nav>
 
     <!-- CTA desktop -->
-    <a href="#contact" class="hidden md:block bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-2 rounded-full transition-colors duration-200">
+    <a
+      href="#contact"
+      class="hidden md:block bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-2 rounded-full transition-colors duration-200"
+    >
       Prendre rendez-vous
     </a>
 
     <!-- Burger -->
-    <button id="burger" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
-      <span class="w-6 h-0.5 bg-neutral-800 transition-all duration-300" id="burger-1"></span>
-      <span class="w-6 h-0.5 bg-neutral-800 transition-all duration-300" id="burger-2"></span>
-      <span class="w-6 h-0.5 bg-neutral-800 transition-all duration-300" id="burger-3"></span>
+    <button
+      id="burger"
+      class="md:hidden flex flex-col gap-1.5 p-2"
+      aria-label="Menu"
+    >
+      <span
+        class="w-6 h-0.5 bg-neutral-800 transition-all duration-300"
+        id="burger-1"></span>
+      <span
+        class="w-6 h-0.5 bg-neutral-800 transition-all duration-300"
+        id="burger-2"></span>
+      <span
+        class="w-6 h-0.5 bg-neutral-800 transition-all duration-300"
+        id="burger-3"></span>
     </button>
-
   </div>
 
   <!-- Menu mobile -->
-  <div id="mobile-menu" class="hidden md:hidden flex-col bg-white border-t border-neutral-100 px-6 py-4 gap-4">
-    {navLinks.map(({ label, href }) => (
-      <a href={href} class="mobile-link text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200 py-2">
-        {label}
-      </a>
-    ))}
-    <a href="#contact" class="mobile-link bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-3 rounded-full text-center transition-colors duration-200 mt-2">
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden flex-col bg-white border-t border-neutral-100 px-6 py-4 gap-4"
+  >
+    {
+      navLinks.map(({ label, href }) => (
+        <a
+          href={href}
+          class="mobile-link text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200 py-2"
+        >
+          {label}
+        </a>
+      ))
+    }
+    <a
+      href="#contact"
+      class="mobile-link bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-3 rounded-full text-center transition-colors duration-200 mt-2"
+    >
       Prendre rendez-vous
     </a>
   </div>
