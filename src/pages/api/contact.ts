@@ -19,7 +19,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   // Email à ta tante
   const { error } = await resend.emails.send({
-    from: 'Creaticlo <onboarding@resend.dev>',
+    from: 'Creati\'Clo <onboarding@resend.dev>',
     to: 'devoni.prog@gmail.com',
     replyTo: 'devoni.prog@gmail.com',
     subject: `Nouvelle demande de ${service} — ${prenom} ${nom}`,
@@ -66,7 +66,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   // Email de confirmation au client
   const { error: errorConfirmation } = await resend.emails.send({
-    from: 'Creaticlo <onboarding@resend.dev>',
+    from: 'Creati\'Clo <onboarding@resend.dev>',
     to: email.toString(),
     subject: `Nous avons bien reçu votre demande — Creaticlo`,
     html: `
