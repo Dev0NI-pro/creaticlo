@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import galleryData from '../data/gallery.json';
+
+const images = galleryData.images;
+---
+
+<Layout title="Galerie — Créati'Clo" description="Découvrez toutes les réalisations de l'atelier Creaticlo : robes sur mesure, retouches, réparations et confection.">
+  <Header />
+
+  <main class="pt-24 pb-24">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col gap-12">
+
+      <!-- Titre -->
+      <div class="flex flex-col gap-4">
+        <span class="text-pink-500 text-sm font-medium tracking-widest uppercase">
+          Nos réalisations
+        </span>
+        <h1 class="text-4xl font-serif text-neutral-800">
+          La Collection de l'Atelier
+        </h1>
+        <p class="text-neutral-500 leading-relaxed max-w-xl">
+          Toutes nos créations, retouches et transformations. Chaque pièce raconte une histoire.
+        </p>
+      </div>
+
+      <!-- Grille -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {images.map(({ src, alt }) => (
+          <div class="overflow-hidden rounded-2xl aspect-[3/4]">
+            <img
+              src={src}
+              alt={alt}
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

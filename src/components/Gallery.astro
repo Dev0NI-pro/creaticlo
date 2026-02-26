@@ -1,23 +1,19 @@
 ---
-const images = [
-    { src: "/images/gallery-1.jpg", alt: "Robe de mariée sur mesure" },
-    { src: "/images/gallery-2.jpg", alt: "Manteau en laine ajusté" },
-    { src: "/images/gallery-3.jpg", alt: "Robe en soie" },
-    {
-        src: "/images/gallery-4.jpg",
-        alt: "Sac a main en daim sur une table en bois",
-    },
-    { src: "/images/gallery-5.jpg", alt: "Pantalon recousu" },
-    { src: "/images/gallery-6.jpg", alt: "Robe de soirée typée fantasy" },
-];
+import galleryData from "../data/gallery.json";
+
+const featured = galleryData.images.filter((img) => img.featured);
 ---
 
 <section id="gallery" class="py-24 bg-neutral-50">
     <div class="max-w-6xl mx-auto px-6 flex flex-col gap-12">
-        <!-- Titre -->
-        <div class="flex items-end justify-between">
+        <!-- Titre + CTA -->
+        <div
+            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+        >
             <div class="flex flex-col gap-4">
-                <span class="text-pink-500 text-sm font-medium tracking-widest uppercase">
+                <span
+                    class="text-pink-500 text-sm font-medium tracking-widest uppercase"
+                >
                     Nos réalisations
                 </span>
                 <h2 class="text-4xl font-serif text-neutral-800">
@@ -28,17 +24,17 @@ const images = [
                     créatives.
                 </p>
             </div>
-
-            <!-- CTA -->
-            <a class="hidden md:flex items-center gap-2 text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200 cursor-not-allowed">
-                Voir plus<span>→</span>
+            
+            <!-- CTA desktop -->
+            <a href="/gallery" class="hidden md:flex items-center gap-2 text-sm text-neutral-600 hover:text-pink-500 transition-colors duration-200">
+                Voir plus <span>→</span>
             </a>
         </div>
 
         <!-- Grille -->
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
             {
-                images.map(({ src, alt }) => (
+                featured.map(({ src, alt }) => (
                     <div class="overflow-hidden rounded-2xl aspect-[3/4]">
                         <img
                             src={src}
@@ -48,6 +44,17 @@ const images = [
                     </div>
                 ))
             }
+        </div>
+
+        <!-- CTA mobile -->
+        <div class="flex md:hidden justify-center">
+            <a
+                href="/gallery"
+                class="flex items-center gap-2 text-sm text-pink-500 border border-pink-500 px-6 py-3 rounded-full"
+            >
+                Voir toutes les réalisations
+                <span>→</span>
+            </a>
         </div>
     </div>
 </section>

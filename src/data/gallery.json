@@ -1,0 +1,40 @@
+{
+  "images": [
+    {
+      "id": "1",
+      "src": "/images/gallery/gallery-1.jpg",
+      "alt": "Robe de mariée sur mesure",
+      "featured": true
+    },
+    {
+      "id": "2",
+      "src": "/images/gallery/gallery-2.jpg",
+      "alt": "Manteau en laine ajusté",
+      "featured": true
+    },
+    {
+      "id": "3",
+      "src": "/images/gallery/gallery-3.jpg",
+      "alt": "Robe en soie",
+      "featured": false
+    },
+    {
+      "id": "4",
+      "src": "/images/gallery/gallery-4.jpg",
+      "alt": "Sac a main en daim sur une table en bois",
+      "featured": true
+    },
+    {
+      "id": "5",
+      "src": "/images/gallery/gallery-5.jpg",
+      "alt": "Pantalon recousu",
+      "featured": true
+    },
+    {
+      "id": "6",
+      "src": "/images/gallery/gallery-6.jpg",
+      "alt": "Robe de soirée typée fantasy",
+      "featured": true
+    }
+  ]
+}

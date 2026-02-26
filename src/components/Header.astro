@@ -1,10 +1,13 @@
 ---
+const currentPath = Astro.url.pathname;
+const isHome = currentPath === '/';
+
 const navLinks = [
-  { label: "Accueil", href: "#hero" },
-  { label: "À propos", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Galerie", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
+  { label: "Accueil", href: isHome ? "#hero" : "/" },
+  { label: "À propos", href: isHome ? "#about" : "/#about" },
+  { label: "Services", href: isHome ? "#services" : "/#services" },
+  { label: "Galerie", href: isHome ? "#gallery" : "/#gallery" },
+  { label: "Contact", href: isHome ? "#contact" : "/#contact" },
 ];
 ---
 
@@ -14,7 +17,7 @@ const navLinks = [
   <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
     <!-- Logo -->
     <a href="/">
-      <img src="/logo.svg" alt="Creaticlo" class="h-6">
+      <img src="/logo.svg" alt="Creaticlo" class="h-6" />
     </a>
 
     <!-- Navigation desktop -->
@@ -95,14 +98,18 @@ const navLinks = [
       menu?.classList.add("hidden");
       menu?.classList.remove("flex");
       b1!.style.transform = "rotate(0deg) translateY(0)";
+      b1!.style.backgroundColor = "";
       b2!.style.opacity = "1";
       b3!.style.transform = "rotate(0deg) translateY(0)";
+      b3!.style.backgroundColor = "";
     } else {
       menu?.classList.remove("hidden");
       menu?.classList.add("flex");
       b1!.style.transform = "rotate(45deg) translateY(8px)";
+      b1!.style.backgroundColor = "#ec4899";
       b2!.style.opacity = "0";
       b3!.style.transform = "rotate(-45deg) translateY(-8px)";
+      b3!.style.backgroundColor = "#ec4899";
     }
   });
 
@@ -112,8 +119,10 @@ const navLinks = [
       menu?.classList.add("hidden");
       menu?.classList.remove("flex");
       b1!.style.transform = "rotate(0deg) translateY(0)";
+      b1!.style.backgroundColor = "";
       b2!.style.opacity = "1";
       b3!.style.transform = "rotate(0deg) translateY(0)";
+      b3!.style.backgroundColor = "";
     });
   });
 </script>
