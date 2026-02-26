@@ -70,8 +70,13 @@ export const POST: APIRoute = async ({ request }) => {
     to: email.toString(),
     subject: `Nous avons bien reçu votre demande — Creaticlo`,
     html: `
-      <div style="background-color: #f9f0f5 !important; padding: 40px 20px; min-height: 100vh;">
-  <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; background-color: #ffffff !important; border-radius: 24px; overflow: hidden;">
+      <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #262626;">
+        
+        <!-- Header -->
+        <div style="text-align: center; margin-bottom: 40px;">
+          <img src="https://creaticlo.netlify.app/logo-mail.png" alt="Creaticlo" style="height: 48px;" />
+          <p style="color: #a3a3a3; font-size: 12px; text-transform: uppercase; letter-spacing: 3px; margin-top: 8px;">Atelier de couture</p>
+        </div>
 
     <!-- Header rose pâle -->
     <div style="background-color: #fdf2f8 !important; text-align: center; padding: 40px 40px 32px;">
