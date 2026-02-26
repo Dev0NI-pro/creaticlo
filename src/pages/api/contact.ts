@@ -78,36 +78,30 @@ export const POST: APIRoute = async ({ request }) => {
           <p style="color: #a3a3a3; font-size: 12px; text-transform: uppercase; letter-spacing: 3px; margin-top: 8px;">Atelier de couture</p>
         </div>
 
-          <!-- Contenu blanc -->
-          <div style="padding: 40px;">
-        
-            <!-- Message principal -->
-            <div style="text-align: center; margin-bottom: 32px;">
-              <p style="color: #ec4899 !important; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Confirmation de réception</p>
-              <h2 style="font-size: 24px; color: #262626 !important; margin-bottom: 16px;">Merci ${prenom},</h2>
-              <p style="color: #737373 !important; font-size: 15px; line-height: 1.8; margin-bottom: 8px;">
-                Nous avons bien reçu votre demande concernant <strong style="color: #262626 !important;">${service}</strong>.
-              </p>
-              <p style="color: #737373 !important; font-size: 15px; line-height: 1.8;">
-                Notre équipe reviendra vers vous dans les plus brefs délais, généralement sous <strong style="color: #262626 !important;">48 heures</strong>.
-              </p>
-            </div>
-        
-            <!-- Récap -->
-            <div style="background: #fdf2f8 !important; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
-              <p style="color: #ec4899 !important; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">Récapitulatif de votre demande</p>
-              <p style="color: #737373 !important; font-size: 14px; line-height: 1.8; margin: 0;">${message}</p>
-            </div>
-        
-            <!-- Footer -->
-            <div style="text-align: center; border-top: 1px solid #fdf2f8 !important; padding-top: 24px;">
-              <p style="color: #a3a3a3 !important; font-size: 12px; line-height: 1.8; margin: 0;">
-                Creaticlo — Atelier de couture<br/>
-                Proche de Bourgoin-Jallieu
-              </p>
-            </div>
-        
-          </div>
+        <!-- Message principal -->
+        <div style="text-align: center; margin-bottom: 32px;">
+          <p style="color: #ec4899 !important; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Confirmation de réception</p>
+          <h2 style="font-size: 24px; color: #262626 !important; margin-bottom: 16px;">Merci ${prenom},</h2>
+          <p style="color: #737373 !important; font-size: 15px; line-height: 1.8; margin-bottom: 8px;">
+            Nous avons bien reçu votre demande concernant <strong style="color: #262626 !important;">${service}</strong>.
+          </p>
+          <p style="color: #737373 !important; font-size: 15px; line-height: 1.8;">
+            Notre équipe reviendra vers vous dans les plus brefs délais, généralement sous <strong style="color: #262626 !important;">48 heures</strong>.
+          </p>
+        </div>
+
+        <!-- Récap -->
+        <div style="background: #fdf2f8 !important; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+          <p style="color: #ec4899 !important; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">Récapitulatif de votre demande</p>
+          <p style="color: #737373 !important; font-size: 14px; line-height: 1.8; margin: 0;">${message}</p>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; border-top: 1px solid #fdf2f8 !important; padding-top: 24px;">
+          <p style="color: #a3a3a3 !important; font-size: 12px; line-height: 1.8; margin: 0;">
+            Creaticlo — Atelier de couture<br/>
+            Proche de Bourgoin-Jallieu
+          </p>
         </div>
       </div>
     `,
