@@ -60,9 +60,12 @@ export const POST: APIRoute = async ({ request }) => {
   });
 
   if (error) {
-    console.log('Erreur Resend:', error);
+    console.error('Erreur Resend:', error);
     return new Response(JSON.stringify({ error: error.message }), { status: 500 });
   }
+
+  // Attendre 5 secondes
+  await new Promise(resolve => setTimeout(resolve, 5000));
 
   // Email de confirmation au client
   const { error: errorConfirmation } = await resend.emails.send({
@@ -108,7 +111,8 @@ export const POST: APIRoute = async ({ request }) => {
   });
 
   if (errorConfirmation) {
-    return new Response(JSON.stringify({ error: 'Erreur envoi confirmation' }), { status: 500 });
+    console.error("Erreur Resend confirmation : ", errorConfirmation);
+    return new Response(JSON.stringify({ error: errorConfirmation.message }), { status: 500 });
   }
 
   return new Response(JSON.stringify({ success: true }), { status: 200 });
