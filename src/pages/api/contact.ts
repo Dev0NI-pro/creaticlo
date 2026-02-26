@@ -19,14 +19,14 @@ export const POST: APIRoute = async ({ request }) => {
 
   // Email à ta tante
   const { error } = await resend.emails.send({
-    from: 'Creati\'Clo <onboarding@resend.dev>',
+    from: 'Formulaire Créati\'Clo <onboarding@resend.dev>',
     to: 'devoni.prog@gmail.com',
     replyTo: 'devoni.prog@gmail.com',
     subject: `Nouvelle demande de ${service} — ${prenom} ${nom}`,
     html: `
       <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #262626;">
         <h1 style="font-size: 24px; color: #262626; margin-bottom: 8px;">Nouvelle demande de contact</h1>
-        <p style="color: #ec4899; font-size: 14px; margin-bottom: 32px; text-transform: uppercase; letter-spacing: 2px;">Creaticlo</p>
+        <p style="color: #ec4899; font-size: 14px; margin-bottom: 32px; text-transform: uppercase; letter-spacing: 2px;">Créati'Clo</p>
         
         <div style="background: #fdf2f8; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
           <table style="width: 100%; border-collapse: collapse;">
@@ -66,15 +66,15 @@ export const POST: APIRoute = async ({ request }) => {
 
   // Email de confirmation au client
   const { error: errorConfirmation } = await resend.emails.send({
-    from: 'Creati\'Clo <onboarding@resend.dev>',
+    from: 'Créati\'Clo <onboarding@resend.dev>',
     to: email.toString(),
-    subject: `Nous avons bien reçu votre demande — Creaticlo`,
+    subject: `Nous avons bien reçu votre demande — Créati'Clo`,
     html: `
       <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; color: #262626;">
         
         <!-- Header -->
         <div style="text-align: center; margin-bottom: 40px;">
-          <img src="https://creaticlo.netlify.app/logo-mail.png" alt="Creaticlo" style="height: 48px;" />
+          <img src="https://creaticlo.netlify.app/logo-mail.png" alt="Créati'Clo" style="height: 48px;" />
           <p style="color: #a3a3a3; font-size: 12px; text-transform: uppercase; letter-spacing: 3px; margin-top: 8px;">Atelier de couture</p>
         </div>
 
@@ -99,7 +99,7 @@ export const POST: APIRoute = async ({ request }) => {
         <!-- Footer -->
         <div style="text-align: center; border-top: 1px solid #fdf2f8 !important; padding-top: 24px;">
           <p style="color: #a3a3a3 !important; font-size: 12px; line-height: 1.8; margin: 0;">
-            Creaticlo — Atelier de couture<br/>
+            Créati'Clo — Atelier de couture<br/>
             Proche de Bourgoin-Jallieu
           </p>
         </div>
