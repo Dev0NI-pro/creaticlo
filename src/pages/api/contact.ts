@@ -70,13 +70,13 @@ export const POST: APIRoute = async ({ request }) => {
     to: email.toString(),
     subject: `Nous avons bien reçu votre demande — Creaticlo`,
     html: `
-      <div style="background-color: #f9f0f5; padding: 40px 20px; min-height: 100vh;">
-  <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 24px; overflow: hidden;">
+      <div style="background-color: #f9f0f5 !important; padding: 40px 20px; min-height: 100vh;">
+  <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; background-color: #ffffff !important; border-radius: 24px; overflow: hidden;">
 
     <!-- Header rose pâle -->
-    <div style="background-color: #fdf2f8; text-align: center; padding: 40px 40px 32px;">
+    <div style="background-color: #fdf2f8 !important; text-align: center; padding: 40px 40px 32px;">
       <img src="https://creaticlo.netlify.app/logo-mail.png" alt="Creaticlo" style="height: 48px;" />
-      <p style="color: #ec4899; font-size: 11px; text-transform: uppercase; letter-spacing: 3px; margin-top: 8px;">Atelier de couture</p>
+      <p style="color: #ec4899 !important; font-size: 11px; text-transform: uppercase; letter-spacing: 3px; margin-top: 8px;">Atelier de couture</p>
     </div>
 
     <!-- Contenu blanc -->
@@ -84,25 +84,25 @@ export const POST: APIRoute = async ({ request }) => {
 
       <!-- Message principal -->
       <div style="text-align: center; margin-bottom: 32px;">
-        <p style="color: #ec4899; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Confirmation de réception</p>
-        <h2 style="font-size: 24px; color: #262626; margin-bottom: 16px;">Merci ${prenom},</h2>
-        <p style="color: #737373; font-size: 15px; line-height: 1.8; margin-bottom: 8px;">
-          Nous avons bien reçu votre demande concernant <strong style="color: #262626;">${service}</strong>.
+        <p style="color: #ec4899 !important; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;">Confirmation de réception</p>
+        <h2 style="font-size: 24px; color: #262626 !important; margin-bottom: 16px;">Merci ${prenom},</h2>
+        <p style="color: #737373 !important; font-size: 15px; line-height: 1.8; margin-bottom: 8px;">
+          Nous avons bien reçu votre demande concernant <strong style="color: #262626 !important;">${service}</strong>.
         </p>
-        <p style="color: #737373; font-size: 15px; line-height: 1.8;">
-          Notre équipe reviendra vers vous dans les plus brefs délais, généralement sous <strong style="color: #262626;">48 heures</strong>.
+        <p style="color: #737373 !important; font-size: 15px; line-height: 1.8;">
+          Notre équipe reviendra vers vous dans les plus brefs délais, généralement sous <strong style="color: #262626 !important;">48 heures</strong>.
         </p>
       </div>
 
       <!-- Récap -->
-      <div style="background: #fdf2f8; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
-        <p style="color: #ec4899; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">Récapitulatif de votre demande</p>
-        <p style="color: #737373; font-size: 14px; line-height: 1.8; margin: 0;">${message}</p>
+      <div style="background: #fdf2f8 !important; border-radius: 12px; padding: 24px; margin-bottom: 32px;">
+        <p style="color: #ec4899 !important; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">Récapitulatif de votre demande</p>
+        <p style="color: #737373 !important; font-size: 14px; line-height: 1.8; margin: 0;">${message}</p>
       </div>
 
       <!-- Footer -->
-      <div style="text-align: center; border-top: 1px solid #fdf2f8; padding-top: 24px;">
-        <p style="color: #a3a3a3; font-size: 12px; line-height: 1.8; margin: 0;">
+      <div style="text-align: center; border-top: 1px solid #fdf2f8 !important; padding-top: 24px;">
+        <p style="color: #a3a3a3 !important; font-size: 12px; line-height: 1.8; margin: 0;">
           Creaticlo — Atelier de couture<br/>
           Proche de Bourgoin-Jallieu
         </p>
