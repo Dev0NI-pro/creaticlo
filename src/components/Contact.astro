@@ -1,4 +1,6 @@
 ---
+import ContactForm from './ContactForm.astro';
+
 const infos = [
     { label: "Adresse", value: "1350 Rte de Pignière, 38300 Tramolé" },
     { label: "Téléphone", value: "+33 1 23 45 67 89" },
@@ -26,106 +28,7 @@ const infos = [
                 </p>
             </div>
 
-            <form id="contact-form" class="flex flex-col gap-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="flex flex-col gap-2">
-                        <label class="text-sm text-neutral-600"
-                            >Prénom <span class="text-pink-500">*</span></label
-                        >
-                        <input
-                            type="text"
-                            name="prenom"
-                            placeholder="Marie"
-                            required
-                            class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 placeholder:text-neutral-300 focus:outline-none focus:border-pink-400 transition-colors"
-                        />
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label class="text-sm text-neutral-600"
-                            >Nom <span class="text-pink-500">*</span></label
-                        >
-                        <input
-                            type="text"
-                            name="nom"
-                            placeholder="Dupont"
-                            required
-                            class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 placeholder:text-neutral-300 focus:outline-none focus:border-pink-400 transition-colors"
-                        />
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="flex flex-col gap-2">
-                        <label class="text-sm text-neutral-600"
-                            >Email <span class="text-pink-500">*</span></label
-                        >
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="marie@exemple.fr"
-                            required
-                            class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 placeholder:text-neutral-300 focus:outline-none focus:border-pink-400 transition-colors"
-                        />
-                    </div>
-                    <div class="flex flex-col gap-2">
-                        <label class="text-sm text-neutral-600">Téléphone</label
-                        >
-                        <input
-                            type="tel"
-                            name="telephone"
-                            placeholder="06 12 34 56 78"
-                            class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 placeholder:text-neutral-300 focus:outline-none focus:border-pink-400 transition-colors"
-                        />
-                    </div>
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="text-sm text-neutral-600"
-                        >Type de projet <span class="text-pink-500">*</span
-                        ></label
-                    >
-                    <select
-                        name="service"
-                        required
-                        class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 focus:outline-none focus:border-pink-400 transition-colors"
-                    >
-                        <option value="">Sélectionnez un service</option>
-                        <option value="Retouche">Retouche</option>
-                        <option value="Confection sur mesure"
-                            >Confection sur mesure</option
-                        >
-                        <option value="Réparation">Réparation</option>
-                    </select>
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="text-sm text-neutral-600"
-                        >Message <span class="text-pink-500">*</span></label
-                    >
-                    <textarea
-                        name="message"
-                        placeholder="Décrivez votre projet..."
-                        rows="4"
-                        required
-                        class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-800 placeholder:text-neutral-300 focus:outline-none focus:border-pink-400 transition-colors resize-none"
-                    ></textarea>
-                </div>
-
-                <!-- Message de statut -->
-                <div
-                    id="form-status"
-                    class="hidden text-sm px-4 py-3 rounded-xl"
-                >
-                </div>
-
-                <button
-                    type="submit"
-                    id="submit-btn"
-                    class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full text-sm transition-colors duration-200 w-fit"
-                >
-                    Envoyer ma demande →
-                </button>
-            </form>
+            <ContactForm />
         </div>
 
         <!-- Infos -->

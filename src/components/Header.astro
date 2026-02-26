@@ -1,6 +1,6 @@
 ---
 const currentPath = Astro.url.pathname;
-const isHome = currentPath === '/';
+const isHome = currentPath === "/";
 
 const navLinks = [
   { label: "Accueil", href: isHome ? "#hero" : "/" },
@@ -35,12 +35,12 @@ const navLinks = [
     </nav>
 
     <!-- CTA desktop -->
-    <a
-      href="#contact"
+    <button
+      id="open-modal"
       class="hidden md:block bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-2 rounded-full transition-colors duration-200"
     >
       Prendre rendez-vous
-    </a>
+    </button>
 
     <!-- Burger -->
     <button
@@ -75,12 +75,12 @@ const navLinks = [
         </a>
       ))
     }
-    <a
-      href="#contact"
+    <button
+      id="open-modal"
       class="mobile-link bg-pink-500 hover:bg-pink-600 text-white text-sm px-5 py-3 rounded-full text-center transition-colors duration-200 mt-2"
     >
       Prendre rendez-vous
-    </a>
+    </button>
   </div>
 </header>
 

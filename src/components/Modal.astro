@@ -1,0 +1,64 @@
+---
+import ContactForm from './ContactForm.astro';
+---
+
+<!-- Overlay -->
+<div id="modal-overlay" class="hidden fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+  
+  <!-- Modale -->
+  <div class="bg-white rounded-2xl w-full max-w-xl max-h-[65vh] md:max-h-[90vh] overflow-y-auto">
+    
+    <!-- Header modale -->
+    <div class="flex items-center justify-between p-6 border-b border-neutral-100">
+      <div class="flex flex-col gap-1">
+        <span class="text-pink-500 text-xs font-medium tracking-widest uppercase">Nous contacter</span>
+        <h3 class="text-xl font-serif text-neutral-800">Demander un Essayage</h3>
+      </div>
+      <button id="close-modal" class="text-neutral-400 hover:text-pink-500 transition-colors duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="p-6">
+      <ContactForm />
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('modal-overlay');
+  const openBtn = document.querySelectorAll('#open-modal');
+  const closeBtn = document.getElementById('close-modal');
+
+  openBtn?.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      overlay?.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    overlay?.classList.add('hidden');
+    document.body.style.overflow = '';
+  });
+
+  // Ferme en cliquant sur l'overlay
+  overlay?.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Ferme avec la touche Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      overlay?.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  });
+</script>
