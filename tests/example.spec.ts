@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, devices } from '@playwright/test';
 
 const BASE_URL = 'http://localhost:4321';
 
@@ -97,4 +97,49 @@ test('le formulaire de contact est present', async ({ page }) => {
 test('le bouton envoyer est present', async ({ page }) => {
   await page.goto(BASE_URL);
   await expect(page.locator('#submit-btn').first()).toBeVisible();
+});
+
+// --- Gallery hover ---
+test('le voile apparait au hover sur desktop', async ({ page }) => {
+  await page.goto(BASE_URL);
+  const card = page.locator('.gallery-card').first();
+  const veil = page.locator('.gallery-veil').first();
+  await card.hover();
+  await expect(veil).not.toHaveCSS('transform', /translateY\(100/);
+});
+
+test('le voile apparait au clic sur mobile', async ({ browser, browserName }) => {
+  test.skip(browserName === 'firefox', 'Firefox ne supporte pas isMobile');
+  const context = await browser.newContext({
+    ...devices['iPhone 13'],
+  });
+  const page = await context.newPage();
+  await page.goto(BASE_URL);
+
+  const card = page.locator('.gallery-card').first();
+  const veil = page.locator('.gallery-veil').first();
+
+  await card.tap();
+  await expect(veil).toHaveCSS('transform', /matrix/);
+
+  await context.close();
+});
+
+test('le voile se ferme quand on tape sur une autre carte', async ({ browser, browserName }) => {
+  test.skip(browserName === 'firefox', 'Firefox ne supporte pas isMobile');
+  const context = await browser.newContext({
+    ...devices['iPhone 13'],
+  });
+  const page = await context.newPage();
+  await page.goto(BASE_URL);
+
+  const card1 = page.locator('.gallery-card').nth(0);
+  const card2 = page.locator('.gallery-card').nth(1);
+  const veil1 = page.locator('.gallery-veil').nth(0);
+
+  await card1.tap();
+  await card2.tap();
+  await expect(veil1).toHaveCSS('transform', /matrix\(1, 0, 0, 1, 0,/);
+
+  await context.close();
 });
