@@ -1,13 +1,6 @@
 {
   "images": [
     {
-      "id": "1",
-      "src": "/images/gallery/gallery-1.jpg",
-      "alt": "Alt modifié par Playwright",
-      "description": "Description modifiée par Playwright.",
-      "featured": true
-    },
-    {
       "id": "2",
       "src": "/images/gallery/gallery-2.jpg",
       "alt": "Manteau en laine ajusté",
