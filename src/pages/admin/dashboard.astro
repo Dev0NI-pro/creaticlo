@@ -1,0 +1,567 @@
+---
+import Layout from '../../layouts/AdminLayout.astro';
+import galleryData from '../../data/gallery.json';
+
+const images = galleryData.images;
+---
+
+<Layout title="Dashboard — Créati'Clo">
+  <div class="min-h-screen bg-neutral-50">
+
+    <!-- Header admin -->
+    <header class="bg-white border-b border-neutral-100 px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <img src="/logo.svg" alt="Créati'Clo" class="h-6" />
+        <span class="text-xs text-neutral-400 tracking-widest uppercase">Administration</span>
+      </div>
+      <button
+        id="logout-btn"
+        class="text-sm text-neutral-500 hover:text-pink-500 transition-colors duration-200"
+      >
+        Se déconnecter
+      </button>
+    </header>
+
+    <!-- Contenu -->
+    <main class="max-w-6xl mx-auto px-6 py-12 flex flex-col gap-12">
+
+      <!-- Titre -->
+      <div class="flex flex-col gap-2">
+        <h1 class="text-3xl font-serif text-neutral-800">Galerie</h1>
+        <p class="text-neutral-500 text-sm">Gérez les photos de votre atelier.</p>
+      </div>
+
+      <!-- Grille -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid">
+
+        {images.map(({ id, src, alt, description, featured }) => (
+          <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-neutral-100" data-id={id}>
+        
+            <!-- Image -->
+            <div class="aspect-[3/4] overflow-hidden">
+              <img src={src} alt={alt} class="w-full h-full object-cover" />
+            </div>
+        
+            <!-- Infos + Actions -->
+            <div class="p-3 flex flex-col gap-2">
+              <p class="text-xs text-neutral-600 truncate">{alt}</p>
+            
+              <!-- 3 icônes -->
+              <div class="flex items-center justify-around pt-1">
+            
+                <!-- Crayon rose -->
+                <button
+                  class="edit-btn p-2 rounded-xl hover:bg-pink-50 transition-colors"
+                  data-src={src}
+                  data-id={id}
+                  data-alt={alt}
+                  data-description={description}
+                  data-featured={featured}
+                  title="Modifier"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                  </svg>
+                </button>
+            
+                <!-- Corbeille rouge -->
+                <button
+                  class="delete-btn p-2 rounded-xl hover:bg-red-50 transition-colors"
+                  data-id={id}
+                  data-src={src}
+                  title="Supprimer"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                    <path d="M10 11v6M14 11v6"/>
+                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                  </svg>
+                </button>
+            
+                <!-- Bookmark jaune -->
+                <button
+                  class="featured-btn p-2 rounded-xl hover:bg-yellow-50 transition-colors"
+                  data-id={id}
+                  data-featured={featured}
+                  title={featured ? "Retirer de la page d'accueil" : "Mettre en vedette"}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class={`w-4 h-4 transition-colors ${featured ? 'text-yellow-400 fill-yellow-400' : 'text-yellow-400'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </button>
+            
+              </div>
+            </div>
+        
+          </div>
+        ))}
+
+        <!-- Zone d'ajout -->
+        <div
+          id="upload-zone"
+          class="aspect-[3/4] border-2 border-dashed border-neutral-200 rounded-2xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-pink-400 hover:bg-pink-50/30 transition-colors duration-200"
+        >
+          <span class="text-3xl text-neutral-300">+</span>
+          <span class="text-xs text-neutral-400">Ajouter une photo</span>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Modale modification -->
+  <div id="edit-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md flex flex-col gap-6 p-6 overflow-y-auto max-h-[90vh]">
+      <!-- Header fixe -->
+      <div class="flex items-center justify-between p-6 pb-0">
+        <h2 class="text-lg font-serif text-neutral-800">Modifier la photo</h2>
+        <button id="close-edit" class="text-neutral-400 hover:text-pink-500 transition-colors">✕</button>
+      </div>
+
+      <!-- Contenu scrollable -->
+      <div class="flex flex-col gap-4 p-6 overflow-y-auto">
+        <!-- Changer la photo -->
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-neutral-600">Photo</label>
+          <button type="button" id="edit-change-photo" class="border border-neutral-200 rounded-xl px-4 py-3 text-sm text-neutral-500 hover:border-pink-400 hover:text-pink-500 transition-colors text-left">
+            📷 Changer la photo (optionnel)
+          </button>
+          <input type="file" id="edit-file-input" accept="image/*" class="hidden" />
+        </div>
+
+        <!-- Cropper edit -->
+        <div id="edit-cropper-container" class="hidden flex flex-col gap-3">
+          <div class="relative w-full bg-neutral-100 rounded-xl overflow-hidden" style="height: 280px;">
+            <img id="edit-cropper-image" src="" alt="Crop" class="max-w-full" />
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <button type="button" id="edit-zoom-in" class="p-2 bg-neutral-100 hover:bg-pink-50 hover:text-pink-500 rounded-xl transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+              </svg>
+            </button>
+            <button type="button" id="edit-zoom-out" class="p-2 bg-neutral-100 hover:bg-pink-50 hover:text-pink-500 rounded-xl transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                <line x1="8" y1="11" x2="14" y2="11"/>
+              </svg>
+            </button>
+            <button type="button" id="edit-rotate-left" class="p-2 bg-neutral-100 hover:bg-pink-50 hover:text-pink-500 rounded-xl transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+              </svg>
+            </button>
+            <button type="button" id="edit-rotate-right" class="p-2 bg-neutral-100 hover:bg-pink-50 hover:text-pink-500 rounded-xl transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <input type="hidden" id="edit-id" />
+
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
+            <label class="text-sm text-neutral-600">Titre / Alt</label>
+            <input
+              type="text"
+              id="edit-alt"
+              maxlength="100"
+              class="border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-400 transition-colors"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label class="text-sm text-neutral-600">Description <span class="text-neutral-400">(max 300 caractères)</span></label>
+            <textarea
+              id="edit-description"
+              maxlength="300"
+              rows="3"
+              class="border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-400 transition-colors resize-none"
+            ></textarea>
+            <span id="char-count" class="text-xs text-neutral-400 text-right">0 / 300</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input type="checkbox" id="edit-featured" class="w-4 h-4 accent-pink-500" />
+            <label for="edit-featured" class="text-sm text-neutral-600">Mettre en vedette sur la page d'accueil</label>
+          </div>
+        </div>
+
+        <div id="edit-status" class="hidden text-sm px-4 py-3 rounded-xl"></div>
+
+      </div>
+      <!-- Footer fixe -->
+      <div class="p-6 pt-4 border-t border-neutral-100">
+        <button
+          id="save-btn"
+          class="w-full bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full text-sm transition-colors duration-200"
+        >
+          Enregistrer
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modale upload -->
+  <div id="upload-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-md flex flex-col gap-6 p-6">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-serif text-neutral-800">Ajouter une photo</h2>
+        <button id="close-upload" class="text-neutral-400 hover:text-pink-500 transition-colors">✕</button>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-neutral-200 rounded-xl p-8 flex flex-col items-center gap-3 cursor-pointer hover:border-pink-400 hover:bg-pink-50/30 transition-colors"
+        >
+          <span class="text-3xl">📷</span>
+          <p class="text-sm text-neutral-500 text-center">Glissez une photo ici ou cliquez pour sélectionner</p>
+          <input type="file" id="upload-file-input" accept="image/*" class="hidden" />
+        </div>
+
+        <!-- Cropper upload -->
+        <div id="upload-cropper-container" class="hidden flex flex-col gap-3">
+          <div class="relative w-full bg-neutral-100 rounded-xl overflow-hidden" style="height: 280px;">
+            <img id="upload-cropper-image" src="" alt="Crop" class="max-w-full" />
+          </div>
+          <div class="flex items-center justify-center gap-2">
+            <button type="button" id="upload-zoom-in" class="p-2 bg-neutral-100 hover:bg-pink-50 hover:text-pink-500 rounded-xl transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+              </svg>
+            </button>
+            <button type="button" id="upload-zoom-out" class="p-2 bg-neutral-100 hover:bg-pink-50 hover:text-pink-500 rounded-xl transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                <line x1="8" y1="11" x2="14" y2="11"/>
+              </svg>
+            </button>
+            <button type="button" id="upload-rotate-left" class="p-2 bg-neutral-100 hover:bg-pink-50 hover:text-pink-500 rounded-xl transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+              </svg>
+            </button>
+            <button type="button" id="upload-rotate-right" class="p-2 bg-neutral-100 hover:bg-pink-50 hover:text-pink-500 rounded-xl transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-4.95"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-neutral-600">Titre / Alt</label>
+          <input
+            type="text"
+            id="upload-alt"
+            maxlength="100"
+            placeholder="Ex: Robe de mariée sur mesure"
+            class="border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-400 transition-colors"
+          />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-neutral-600">Description <span class="text-neutral-400">(max 300 caractères)</span></label>
+          <textarea
+            id="upload-description"
+            maxlength="300"
+            rows="3"
+            placeholder="Décrivez cette réalisation..."
+            class="border border-neutral-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-400 transition-colors resize-none"
+          ></textarea>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <input type="checkbox" id="upload-featured" class="w-4 h-4 accent-pink-500" />
+          <label for="upload-featured" class="text-sm text-neutral-600">Mettre en vedette sur la page d'accueil</label>
+        </div>
+      </div>
+
+      <div id="upload-status" class="hidden text-sm px-4 py-3 rounded-xl"></div>
+
+      <button
+        id="upload-btn"
+        class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full text-sm transition-colors duration-200"
+      >
+        Ajouter la photo
+      </button>
+    </div>
+  </div>
+
+</Layout>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" />
+
+<script>
+  import Cropper from 'cropperjs';
+  import 'cropperjs/dist/cropper.css';
+
+  let uploadCropper: Cropper | null = null;
+  let editCropper: Cropper | null = null;
+
+  const editModal = document.getElementById('edit-modal') as HTMLDivElement;
+  const uploadModal = document.getElementById('upload-modal') as HTMLDivElement;
+
+  // --- Logout ---
+  document.getElementById('logout-btn')?.addEventListener('click', async () => {
+    await fetch('/api/admin/logout', { method: 'POST' });
+    window.location.href = '/admin';
+  });
+
+  // --- Fermeture modales ---
+  document.getElementById('close-edit')?.addEventListener('click', () => {
+    editModal.classList.add('hidden');
+    if (editCropper) { editCropper.destroy(); editCropper = null; }
+  });
+
+  document.getElementById('close-upload')?.addEventListener('click', () => {
+    uploadModal.classList.add('hidden');
+    if (uploadCropper) { uploadCropper.destroy(); uploadCropper = null; }
+  });
+
+  // --- Fonction init cropper v1 ---
+  function initCropper(imageEl: HTMLImageElement, src: string, cropperRef: 'upload' | 'edit') {
+    imageEl.src = src;
+    const cropper = new Cropper(imageEl, {
+      aspectRatio: 3 / 4,
+      viewMode: 1,
+      dragMode: 'move',
+      autoCropArea: 1,
+      restore: false,
+      guides: true,
+      center: true,
+      highlight: false,
+      cropBoxMovable: true,
+      cropBoxResizable: false,
+      toggleDragModeOnDblclick: false,
+    });
+
+    if (cropperRef === 'upload') uploadCropper = cropper;
+    else editCropper = cropper;
+
+    document.getElementById(`${cropperRef}-zoom-in`)?.addEventListener('click', () => cropper.zoom(0.1));
+    document.getElementById(`${cropperRef}-zoom-out`)?.addEventListener('click', () => cropper.zoom(-0.1));
+    document.getElementById(`${cropperRef}-rotate-left`)?.addEventListener('click', () => cropper.rotate(-90));
+    document.getElementById(`${cropperRef}-rotate-right`)?.addEventListener('click', () => cropper.rotate(90));
+  }
+
+  // --- Upload ---
+  const uploadFileInput = document.getElementById('upload-file-input') as HTMLInputElement;
+  const uploadDropZone = document.getElementById('drop-zone') as HTMLDivElement;
+  const uploadCropperImage = document.getElementById('upload-cropper-image') as HTMLImageElement;
+  const uploadCropperContainer = document.getElementById('upload-cropper-container') as HTMLDivElement;
+
+  document.getElementById('upload-zone')?.addEventListener('click', () => {
+    uploadModal.classList.remove('hidden');
+  });
+
+  uploadDropZone.addEventListener('click', () => uploadFileInput.click());
+
+  uploadDropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadDropZone.classList.add('border-pink-400', 'bg-pink-50/30');
+  });
+
+  uploadDropZone.addEventListener('dragleave', () => {
+    uploadDropZone.classList.remove('border-pink-400', 'bg-pink-50/30');
+  });
+
+  uploadDropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    const file = (e as DragEvent).dataTransfer?.files[0];
+    if (file) handleUploadFile(file);
+  });
+
+  uploadFileInput.addEventListener('change', () => {
+    const file = uploadFileInput.files?.[0];
+    if (file) handleUploadFile(file);
+  });
+
+  function handleUploadFile(file: File) {
+    if (uploadCropper) { uploadCropper.destroy(); uploadCropper = null; }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      uploadCropperContainer.classList.remove('hidden');
+      uploadDropZone.classList.add('hidden');
+      initCropper(uploadCropperImage, e.target?.result as string, 'upload');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  document.getElementById('upload-btn')?.addEventListener('click', async () => {
+    const alt = (document.getElementById('upload-alt') as HTMLInputElement).value;
+    const description = (document.getElementById('upload-description') as HTMLTextAreaElement).value;
+    const featured = (document.getElementById('upload-featured') as HTMLInputElement).checked;
+    const status = document.getElementById('upload-status') as HTMLDivElement;
+    const btn = document.getElementById('upload-btn') as HTMLButtonElement;
+
+    if (!uploadCropper || !alt) {
+      status.className = 'text-sm px-4 py-3 rounded-xl bg-red-50 text-red-600';
+      status.textContent = '✗ Veuillez sélectionner une photo et renseigner un titre.';
+      status.classList.remove('hidden');
+      return;
+    }
+
+    btn.textContent = 'Upload en cours...';
+    btn.disabled = true;
+
+    const canvas = uploadCropper.getCroppedCanvas({ width: 800, height: 1067 });
+    const base64 = canvas.toDataURL('image/jpeg', 0.85);
+
+    const response = await fetch('/api/admin/upload', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: base64, alt, description, featured }),
+    });
+
+    if (response.ok) {
+      status.className = 'text-sm px-4 py-3 rounded-xl bg-green-50 text-green-700';
+      status.textContent = '✓ Photo ajoutée ! Le site se met à jour...';
+      status.classList.remove('hidden');
+      setTimeout(() => window.location.reload(), 2000);
+    } else {
+      status.className = 'text-sm px-4 py-3 rounded-xl bg-red-50 text-red-600';
+      status.textContent = '✗ Une erreur est survenue.';
+      status.classList.remove('hidden');
+    }
+
+    btn.textContent = 'Ajouter la photo';
+    btn.disabled = false;
+  });
+
+  // --- Edit ---
+  const editCropperImage = document.getElementById('edit-cropper-image') as HTMLImageElement;
+  const editCropperContainer = document.getElementById('edit-cropper-container') as HTMLDivElement;
+  const editFileInput = document.getElementById('edit-file-input') as HTMLInputElement;
+  let currentEditSrc = '';
+
+  document.querySelectorAll('.edit-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      console.log('edit clicked', btn.getAttribute('data-id'));
+      const id = btn.getAttribute('data-id')!;
+      const alt = btn.getAttribute('data-alt')!;
+      const description = btn.getAttribute('data-description')!;
+      const featured = btn.getAttribute('data-featured') === 'true';
+      const src = btn.getAttribute('data-src')!;
+
+      currentEditSrc = btn.getAttribute('data-src')!;
+      (document.getElementById('edit-id') as HTMLInputElement).value = id;
+      (document.getElementById('edit-alt') as HTMLInputElement).value = alt;
+      (document.getElementById('edit-description') as HTMLTextAreaElement).value = description;
+      (document.getElementById('edit-featured') as HTMLInputElement).checked = featured;
+
+
+      const charCount = document.getElementById('char-count')!;
+      charCount.textContent = `${description.length} / 300`;
+
+      if (editCropper) { editCropper.destroy(); editCropper = null; }
+      editCropperContainer.classList.add('hidden');
+      editFileInput.value = '';
+
+      editModal.classList.remove('hidden');
+    });
+  });
+
+  document.getElementById('edit-change-photo')?.addEventListener('click', () => editFileInput.click());
+
+  editFileInput.addEventListener('change', () => {
+    const file = editFileInput.files?.[0];
+    if (!file) return;
+    if (editCropper) { editCropper.destroy(); editCropper = null; }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      editCropperContainer.classList.remove('hidden');
+      initCropper(editCropperImage, e.target?.result as string, 'edit');
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById('edit-description')?.addEventListener('input', (e) => {
+    const val = (e.target as HTMLTextAreaElement).value;
+    document.getElementById('char-count')!.textContent = `${val.length} / 300`;
+  });
+
+  
+
+  document.getElementById('save-btn')?.addEventListener('click', async () => {
+    const id = (document.getElementById('edit-id') as HTMLInputElement).value;
+    const alt = (document.getElementById('edit-alt') as HTMLInputElement).value;
+    const description = (document.getElementById('edit-description') as HTMLTextAreaElement).value;
+    const featured = (document.getElementById('edit-featured') as HTMLInputElement).checked;
+    const status = document.getElementById('edit-status') as HTMLDivElement;
+    const btn = document.getElementById('save-btn') as HTMLButtonElement;
+
+    btn.textContent = 'Enregistrement...';
+    btn.disabled = true;
+
+    let body: Record<string, unknown> = { id, src: currentEditSrc, alt, description, featured };
+
+    if (editCropper) {
+      const canvas = editCropper.getCroppedCanvas({ width: 800, height: 1067 });
+      body.image = canvas.toDataURL('image/jpeg', 0.85);
+    }
+
+    const response = await fetch('/api/admin/update', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+
+    if (response.ok) {
+      status.className = 'text-sm px-4 py-3 rounded-xl bg-green-50 text-green-700';
+      status.textContent = '✓ Modifications enregistrées ! Le site se met à jour...';
+      status.classList.remove('hidden');
+      setTimeout(() => window.location.reload(), 2000);
+    } else {
+      status.className = 'text-sm px-4 py-3 rounded-xl bg-red-50 text-red-600';
+      status.textContent = '✗ Une erreur est survenue.';
+      status.classList.remove('hidden');
+    }
+
+    btn.textContent = 'Enregistrer';
+    btn.disabled = false;
+  });
+
+  // --- Featured toggle ---
+  document.querySelectorAll('.featured-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = btn.getAttribute('data-id')!;
+      const featured = btn.getAttribute('data-featured') === 'true';
+
+      const response = await fetch('/api/admin/update', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, featured: !featured }),
+      });
+
+      if (response.ok) window.location.reload();
+    });
+  });
+
+  // --- Delete ---
+  document.querySelectorAll('.delete-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = btn.getAttribute('data-id')!;
+      const src = btn.getAttribute('data-src')!;
+
+      const confirmed = confirm('Êtes-vous sûr de vouloir supprimer cette photo ? Cette action est irréversible.');
+      if (!confirmed) return;
+
+      const response = await fetch('/api/admin/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, src }),
+      });
+
+      if (response.ok) window.location.reload();
+    });
+  });
+</script>

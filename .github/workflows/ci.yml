@@ -56,6 +56,11 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO: ${{ secrets.GITHUB_REPO }}
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
