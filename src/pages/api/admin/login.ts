@@ -10,8 +10,8 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
     cookies.set('admin_session', 'authenticated', {
         httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
+        secure: import.meta.env.PROD,
+        sameSite: 'lax',
         maxAge: 60 * 60 * 8, //8 heures
         path: '/'
     });

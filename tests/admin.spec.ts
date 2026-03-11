@@ -1,7 +1,9 @@
 import { test, expect, devices } from '@playwright/test';
+import { TEST_IMAGE_BUFFER } from './fixtures/test-image';
 
 const BASE_URL = 'http://localhost:4321';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD!;
+const IS_CI = !!process.env.CI;
 
 // Helper pour se connecter
 async function login(page: any) {
@@ -69,6 +71,7 @@ test('la modale upload se ferme avec la croix', async ({ page }) => {
 
 // --- CRUD ---
 test('ajout d\'une image avec alt et description', async ({ page }) => {
+  test.skip(!IS_CI, 'Test CRUD uniquement en CI');
   await login(page);
 
   // Ouvre modale upload
@@ -79,7 +82,7 @@ test('ajout d\'une image avec alt et description', async ({ page }) => {
   await fileInput.setInputFiles({
     name: 'test.jpg',
     mimeType: 'image/jpeg',
-    buffer: Buffer.from('fake-image-content'),
+    buffer: TEST_IMAGE_BUFFER,
   });
 
   // Remplit les champs
@@ -88,20 +91,22 @@ test('ajout d\'une image avec alt et description', async ({ page }) => {
 
   // Soumet
   await page.click('#upload-btn');
-  await expect(page.locator('#upload-status')).toContainText('✓');
+  await expect(page.locator('#upload-status')).toContainText('✓', { timeout: 10000 });
 });
 
 test('modification d\'une image', async ({ page }) => {
+  test.skip(!IS_CI, 'Test CRUD uniquement en CI');
   await login(page);
 
   await page.click('.edit-btn');
   await page.fill('#edit-alt', 'Alt modifié par Playwright');
   await page.fill('#edit-description', 'Description modifiée par Playwright.');
   await page.click('#save-btn');
-  await expect(page.locator('#edit-status')).toContainText('✓');
+  await expect(page.locator('#edit-status')).toContainText('✓', { timeout: 10000 });
 });
 
 test('suppression d\'une image avec confirmation', async ({ page }) => {
+  test.skip(!IS_CI, 'Test CRUD uniquement en CI');
   await login(page);
 
   // Accepte la boîte de confirmation

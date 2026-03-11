@@ -1,5 +1,5 @@
-const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
-const GITHUB_REPO = import.meta.env.GITHUB_REPO;
+const GITHUB_TOKEN = import.meta.env.GH_TOKEN;
+const GITHUB_REPO = import.meta.env.GH_REPO;
 const GITHUB_BRANCH = 'netlify-prod';
 const API_BASE = 'https://api.github.com';
 
