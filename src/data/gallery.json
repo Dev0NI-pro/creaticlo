@@ -33,63 +33,7 @@
       "src": "/images/gallery/gallery-1773318330968.jpg",
       "alt": "Rideaux blanc",
       "description": "Rideaux blanc cassé retaillé sur mesure et réparation des anneaux en metal dechiré",
-      "featured": false
-    },
-    {
-      "id": "1773318710156",
-      "src": "/images/gallery/gallery-1773318710156.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773318795861",
-      "src": "/images/gallery/gallery-1773318795861.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773318909111",
-      "src": "/images/gallery/gallery-1773318909111.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773318997771",
-      "src": "/images/gallery/gallery-1773318997771.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773319078377",
-      "src": "/images/gallery/gallery-1773319078377.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773319159161",
-      "src": "/images/gallery/gallery-1773319159161.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773320290145",
-      "src": "/images/gallery/gallery-1773320290145.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773320375859",
-      "src": "/images/gallery/gallery-1773320375859.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
+      "featured": true
     },
     {
       "id": "1773324139261",
