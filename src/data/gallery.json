@@ -178,8 +178,8 @@
     {
       "id": "1773309098440",
       "src": "/images/gallery/gallery-1773309098440.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
+      "alt": "Alt modifié par Playwright",
+      "description": "Description modifiée par Playwright.",
       "featured": false
     }
   ]
