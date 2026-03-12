@@ -48,6 +48,13 @@
       "alt": "Image de test Playwright",
       "description": "Description de test ajoutée par Playwright.",
       "featured": false
+    },
+    {
+      "id": "1773311020365",
+      "src": "/images/gallery/gallery-1773311020365.jpg",
+      "alt": "Robe de mariée sur mesure",
+      "description": "Robe en dentelle a épaule nue",
+      "featured": true
     }
   ]
 }
