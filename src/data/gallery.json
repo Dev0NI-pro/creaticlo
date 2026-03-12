@@ -2,16 +2,9 @@
   "images": [
     {
       "id": "2",
-      "src": "/images/gallery/gallery-2.jpg",
+      "src": "/images/gallery/gallery-1773318330968.jpg",
       "alt": "Manteau en laine ajusté",
       "description": "Manteau vintage années 60 entièrement restructuré et ajusté pour un rendu moderne.",
-      "featured": true
-    },
-    {
-      "id": "3",
-      "src": "/images/gallery/gallery-3.jpg",
-      "alt": "Robe en soie",
-      "description": "Robe de soirée en soie ivoire, retouche complète et broderies ajoutées à la main.",
       "featured": false
     },
     {
@@ -39,7 +32,7 @@
       "id": "1773318330968",
       "src": "/images/gallery/gallery-1773318330968.jpg",
       "alt": "Rideaux blanc",
-      "description": "Rideaux blanc cassé retaillé sur mesure",
+      "description": "Rideaux blanc cassé retaillé sur mesure et réparation des anneaux en metal dechiré",
       "featured": false
     },
     {
@@ -97,6 +90,13 @@
       "alt": "Image de test Playwright",
       "description": "Description de test ajoutée par Playwright.",
       "featured": false
+    },
+    {
+      "id": "1773324139261",
+      "src": "/images/gallery/gallery-1773324139261.jpg",
+      "alt": "Coussin d'exterieur",
+      "description": "Matelassage d'un coussin d'exterieur",
+      "featured": true
     }
   ]
 }
