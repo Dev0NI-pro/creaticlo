@@ -5,13 +5,6 @@
       "src": "/images/gallery/gallery-2.jpg",
       "alt": "Manteau en laine ajusté",
       "description": "Manteau vintage années 60 entièrement restructuré et ajusté pour un rendu moderne.",
-      "featured": true
-    },
-    {
-      "id": "3",
-      "src": "/images/gallery/gallery-3.jpg",
-      "alt": "Robe en soie",
-      "description": "Robe de soirée en soie ivoire, retouche complète et broderies ajoutées à la main.",
       "featured": false
     },
     {
@@ -34,13 +27,6 @@
       "alt": "Robe de soirée typée fantasy",
       "description": "Création originale sur mesure, inspiration fantasy avec travail de drapé complexe.",
       "featured": true
-    },
-    {
-      "id": "1773318330968",
-      "src": "/images/gallery/gallery-1773318330968.jpg",
-      "alt": "Rideaux blanc",
-      "description": "Rideaux blanc cassé retaillé sur mesure",
-      "featured": false
     }
   ]
 }
