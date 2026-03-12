@@ -1693,6 +1693,13 @@
       "alt": "Image de test Playwright",
       "description": "Description de test ajoutée par Playwright.",
       "featured": false
+    },
+    {
+      "id": "1773316367218",
+      "src": "/images/gallery/gallery-1773316367218.jpg",
+      "alt": "Image de test Playwright",
+      "description": "Description de test ajoutée par Playwright.",
+      "featured": false
     }
   ]
 }
