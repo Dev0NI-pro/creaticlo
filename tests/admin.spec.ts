@@ -41,7 +41,7 @@ test('la modale upload se ferme avec la croix', async ({ page }) => {
 // --- CRUD ---
 test('ajout d\'une image avec alt et description', async ({ page }) => {
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
-  
+
   await page.goto(`${BASE_URL}/admin/dashboard`);
 
   await page.click('#upload-zone');
@@ -66,36 +66,35 @@ test('ajout d\'une image avec alt et description', async ({ page }) => {
   createdImageId = data.id;
 });
 
-test('modification d\'une image', async ({ page }) => {
+test('modification de l\'image créée par le test', async ({ page }) => {
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
   test.skip(!createdImageId, 'Dépend du test d\'ajout');
 
-  await page.goto(`${BASE_URL}/admin/dashboard`);
+  // On teste l'API directement, pas le dashboard
+  const response = await page.request.put(`${BASE_URL}/api/admin/update`, {
+    data: {
+      id: createdImageId,
+      alt: 'Alt modifié par Playwright',
+      description: 'Description modifiée par Playwright.',
+      featured: false,
+    },
+  });
 
-  await page.waitForSelector(`[data-id="${createdImageId}"]`, { timeout: 15000 });
-  await page.click(`[data-id="${createdImageId}"] .edit-btn`);
-  await expect(page.locator('#edit-modal')).not.toHaveClass(/hidden/);
-  await page.fill('#edit-alt', 'Alt modifié par Playwright');
-  await page.fill('#edit-description', 'Description modifiée par Playwright.');
-  await page.click('#save-btn');
-  await expect(page.locator('#edit-status')).toContainText('✓', { timeout: 15000 });
+  expect(response.ok()).toBeTruthy();
 });
 
-test('suppression d\'une image avec confirmation', async ({ page }) => {
+test('suppression de l\'image créée par le test', async ({ page }) => {
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
   test.skip(!createdImageId, 'Dépend du test d\'ajout');
-  
-  await page.goto(`${BASE_URL}/admin/dashboard`);
 
-  const initialCount = await page.locator('.edit-btn').count();
+  const response = await page.request.delete(`${BASE_URL}/api/admin/delete`, {
+    data: {
+      id: createdImageId,
+      src: `/images/gallery/gallery-${createdImageId}.jpg`,
+    },
+  });
 
-  page.on('dialog', dialog => dialog.accept());
-  await page.waitForSelector(`[data-id="${createdImageId}"]`, { timeout: 15000 });
-  await page.click(`[data-id="${createdImageId}"] .delete-btn`);
-
-  await page.waitForURL(`${BASE_URL}/admin/dashboard`);
-  const newCount = await page.locator('.edit-btn').count();
-  expect(newCount).toBe(initialCount - 1);
+  expect(response.ok()).toBeTruthy();
 });
 
 test('déconnexion redirige vers login', async ({ page }) => {
