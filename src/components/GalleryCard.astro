@@ -1,0 +1,59 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  description: string;
+}
+
+const { src, alt, description } = Astro.props;
+---
+
+<div class="gallery-card group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer">
+  <!-- Image -->
+  <img
+    src={src}
+    alt={alt}
+    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+  />
+
+  <!-- Voile -->
+  <div class="gallery-veil absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out flex flex-col justify-end p-4">
+    <p class="text-white text-xs font-medium tracking-widest uppercase mb-2">{alt}</p>
+    <p class="text-white/80 text-xs leading-relaxed">{description}</p>
+  </div>
+</div>
+
+<script>
+  const isTouchDevice = window.matchMedia('(hover: none)').matches;
+
+  if (isTouchDevice) {
+    document.querySelectorAll('.gallery-card').forEach((card) => {
+      card.setAttribute('data-open', 'false');
+      const veil = card.querySelector('.gallery-veil') as HTMLElement;
+      if (veil) {
+        veil.style.transform = 'translateY(100%)';
+        veil.addEventListener('click', (e) => e.stopPropagation());
+      }
+    });
+
+    document.querySelectorAll('.gallery-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        const veil = card.querySelector('.gallery-veil') as HTMLElement;
+        if (!veil) return;
+
+        const isOpen = card.getAttribute('data-open') === 'true';
+
+        document.querySelectorAll('.gallery-card').forEach((c) => {
+          const v = c.querySelector('.gallery-veil') as HTMLElement;
+          if (v) v.style.transform = 'translateY(100%)';
+          c.setAttribute('data-open', 'false');
+        });
+
+        if (!isOpen) {
+          veil.style.transform = 'translateY(0%)';
+          card.setAttribute('data-open', 'true');
+        }
+      });
+    });
+  }
+</script>

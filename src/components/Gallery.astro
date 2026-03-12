@@ -1,4 +1,5 @@
 ---
+import GalleryCard from "./GalleryCard.astro";
 import galleryData from "../data/gallery.json";
 
 const featured = galleryData.images.filter((img) => img.featured);
@@ -34,14 +35,8 @@ const featured = galleryData.images.filter((img) => img.featured);
         <!-- Grille -->
         <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
             {
-                featured.map(({ src, alt }) => (
-                    <div class="overflow-hidden rounded-2xl aspect-[3/4]">
-                        <img
-                            src={src}
-                            alt={alt}
-                            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                        />
-                    </div>
+                featured.map(({ src, alt, description }) => (
+                    <GalleryCard src={src} alt={alt} description={description} />
                 ))
             }
         </div>

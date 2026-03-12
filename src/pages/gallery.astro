@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import GalleryCard from '../components/GalleryCard.astro';
 import galleryData from '../data/gallery.json';
 
 const images = galleryData.images;
@@ -28,14 +29,8 @@ const images = galleryData.images;
 
       <!-- Grille -->
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {images.map(({ src, alt }) => (
-          <div class="overflow-hidden rounded-2xl aspect-[3/4]">
-            <img
-              src={src}
-              alt={alt}
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-            />
-          </div>
+        {images.map(({ src, alt, description }) => (
+          <GalleryCard src={src} alt={alt} description={description} />
         ))}
       </div>
 
