@@ -5,13 +5,6 @@
       "src": "/images/gallery/gallery-2.jpg",
       "alt": "Manteau en laine ajusté",
       "description": "Manteau vintage années 60 entièrement restructuré et ajusté pour un rendu moderne.",
-      "featured": true
-    },
-    {
-      "id": "3",
-      "src": "/images/gallery/gallery-3.jpg",
-      "alt": "Robe en soie",
-      "description": "Robe de soirée en soie ivoire, retouche complète et broderies ajoutées à la main.",
       "featured": false
     },
     {
@@ -33,34 +26,6 @@
       "src": "/images/gallery/gallery-6.jpg",
       "alt": "Robe de soirée typée fantasy",
       "description": "Création originale sur mesure, inspiration fantasy avec travail de drapé complexe.",
-      "featured": true
-    },
-    {
-      "id": "1773310576592",
-      "src": "/images/gallery/gallery-1773310576592.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773310662565",
-      "src": "/images/gallery/gallery-1773310662565.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773311020365",
-      "src": "/images/gallery/gallery-1773311020365.jpg",
-      "alt": "Robe de mariée sur mesure",
-      "description": "Robe en dentelle a épaule nue",
-      "featured": true
-    },
-    {
-      "id": "1773311733857",
-      "src": "/images/gallery/gallery-1773311733857.jpg",
-      "alt": "Robe de mariée sur mesure",
-      "description": "Robe de mariée en dentelle avec épaules nues",
       "featured": true
     }
   ]

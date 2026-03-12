@@ -2,9 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [main, dev]
-  pull_request:
-    branches: [main, dev]
+    branches: [netlify-staging]
+    paths-ignore:
+      - 'src/data/gallery.json'
+      - 'public/images/gallery/**'
 
 jobs:
   build:
@@ -26,6 +27,9 @@ jobs:
         run: npm run build
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REPO: ${{ secrets.GH_REPO }}
+          GH_BRANCH: ${{ secrets.GH_BRANCH }}
 
   e2e:
     runs-on: ubuntu-latest
@@ -46,16 +50,68 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Start dev server
-        run: npm run dev &
+      - name: Wait for Netlify staging deployment
+        run: npx wait-on https://netlify-staging--creaticlo.netlify.app --timeout 300000 --interval 5000
+
+      - name: Run Playwright tests - chromium
+        run: npx playwright test --project=chromium --project=setup --project=auth-tests
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REPO: ${{ secrets.GH_REPO }}
+          GH_BRANCH: ${{ secrets.GH_BRANCH }}
+          BASE_URL: https://netlify-staging--creaticlo.netlify.app
 
-      - name: Wait for server
-        run: npx wait-on http://localhost:4321 --timeout 30000
+      - name: Run Playwright tests - firefox
+        run: npx playwright test --project=firefox
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REPO: ${{ secrets.GH_REPO }}
+          GH_BRANCH: ${{ secrets.GH_BRANCH }}
+          BASE_URL: https://netlify-staging--creaticlo.netlify.app
 
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run Playwright tests - webkit
+        run: npx playwright test --project=webkit
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REPO: ${{ secrets.GH_REPO }}
+          GH_BRANCH: ${{ secrets.GH_BRANCH }}
+          BASE_URL: https://netlify-staging--creaticlo.netlify.app
+
+      - name: Run Playwright tests - edge
+        run: npx playwright test --project=edge
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REPO: ${{ secrets.GH_REPO }}
+          GH_BRANCH: ${{ secrets.GH_BRANCH }}
+          BASE_URL: https://netlify-staging--creaticlo.netlify.app
+
+      - name: Run Playwright tests - mobile-chrome
+        run: npx playwright test --project=mobile-chrome
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REPO: ${{ secrets.GH_REPO }}
+          GH_BRANCH: ${{ secrets.GH_BRANCH }}
+          BASE_URL: https://netlify-staging--creaticlo.netlify.app
+
+      - name: Run Playwright tests - mobile-safari
+        run: npx playwright test --project=mobile-safari
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REPO: ${{ secrets.GH_REPO }}
+          GH_BRANCH: ${{ secrets.GH_BRANCH }}
+          BASE_URL: https://netlify-staging--creaticlo.netlify.app
 
       - name: Upload test report
         uses: actions/upload-artifact@v4
@@ -63,3 +119,27 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
+
+  merge:
+    runs-on: ubuntu-latest
+    needs: e2e
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Merge netlify-staging into main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout main
+          git merge netlify-staging --no-ff -m "chore: merge netlify-staging into main [skip ci]"
+          git push origin main
+
+      - name: Merge netlify-staging into netlify-prod
+        run: |
+          git checkout netlify-prod
+          git merge netlify-staging --no-ff -m "chore: merge netlify-staging into netlify-prod [skip ci]"
+          git push origin netlify-prod

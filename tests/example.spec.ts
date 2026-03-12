@@ -1,6 +1,6 @@
 import { test, expect, devices } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:4321';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:4321';
 
 // --- Page d'accueil ---
 test('la page d accueil se charge', async ({ page }) => {

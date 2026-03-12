@@ -1,0 +1,142 @@
+---
+import Layout from "../../layouts/AdminLayout.astro";
+
+// Redirige si déjà connecté
+const session = Astro.cookies.get("admin_session");
+if (session?.value === "authenticated") {
+    return Astro.redirect("/admin/dashboard");
+}
+---
+
+<Layout title="Admin — Créati'Clo">
+    <div
+        class="min-h-screen bg-neutral-50 flex items-center justify-center p-6"
+    >
+        <div
+            class="bg-white rounded-2xl p-8 w-full max-w-sm flex flex-col gap-6 shadow-sm"
+        >
+            <!-- Logo -->
+            <div class="text-center flex flex-col gap-2">
+                <img src="/logo.svg" alt="Créati'Clo" class="h-8 mx-auto" />
+                <p class="text-xs text-neutral-400 tracking-widest uppercase">
+                    Administration
+                </p>
+            </div>
+
+            <!-- Formulaire -->
+            <form id="login-form" class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
+                    <label class="text-sm text-neutral-600">Mot de passe</label>
+                    <div class="relative">
+                        <input
+                            type="password"
+                            name="password"
+                            id="password-input"
+                            placeholder="••••••••"
+                            required
+                            class="w-full border border-neutral-200 rounded-xl px-4 py-3 pr-12 text-sm focus:outline-none focus:border-pink-400 transition-colors"
+                        />
+                        <button
+                            type="button"
+                            id="toggle-password"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-pink-500 transition-colors"
+                        >
+                            <svg
+                                id="eye-open"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                                ></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <svg
+                                id="eye-closed"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-4 h-4 hidden"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path
+                                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
+                                ></path>
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    id="login-error"
+                    class="hidden text-sm px-4 py-3 rounded-xl bg-red-50 text-red-600"
+                >
+                </div>
+
+                <button
+                    type="submit"
+                    id="login-btn"
+                    class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full text-sm transition-colors duration-200"
+                >
+                    Se connecter
+                </button>
+            </form>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    const form = document.getElementById("login-form") as HTMLFormElement;
+    const error = document.getElementById("login-error") as HTMLDivElement;
+    const btn = document.getElementById("login-btn") as HTMLButtonElement;
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        btn.textContent = "Connexion...";
+        btn.disabled = true;
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch("/api/admin/login", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.ok) {
+                window.location.href = "/admin/dashboard";
+            } else {
+                error.textContent = "Mot de passe incorrect.";
+                error.classList.remove("hidden");
+            }
+        } catch {
+            error.textContent = "Une erreur est survenue.";
+            error.classList.remove("hidden");
+        }
+
+        btn.textContent = "Se connecter";
+        btn.disabled = false;
+    });
+
+    const toggleBtn = document.getElementById(
+        "toggle-password",
+    ) as HTMLButtonElement;
+    const passwordInput = document.getElementById(
+        "password-input",
+    ) as HTMLInputElement;
+    const eyeOpen = document.getElementById("eye-open") as HTMLElement;
+    const eyeClosed = document.getElementById("eye-closed") as HTMLElement;
+
+    toggleBtn.addEventListener("click", () => {
+        const isPassword = passwordInput.type === "password";
+        passwordInput.type = isPassword ? "text" : "password";
+        eyeOpen.classList.toggle("hidden");
+        eyeClosed.classList.toggle("hidden");
+    });
+</script>
