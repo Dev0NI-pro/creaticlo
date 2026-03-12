@@ -1,13 +1,6 @@
 {
   "images": [
     {
-      "id": "4",
-      "src": "/images/gallery/gallery-4.jpg",
-      "alt": "Sac a main en daim sur une table en bois",
-      "description": "Sac à main en daim restauré, coutures refaites et doublure intérieure remplacée.",
-      "featured": true
-    },
-    {
       "id": "5",
       "src": "/images/gallery/gallery-5.jpg",
       "alt": "Pantalon recousu",
@@ -31,6 +24,13 @@
     {
       "id": "1773332058790",
       "src": "/images/gallery/gallery-1773332058790.jpg",
+      "alt": "Image de test Playwright",
+      "description": "Description de test ajoutée par Playwright.",
+      "featured": false
+    },
+    {
+      "id": "1773332096609",
+      "src": "/images/gallery/gallery-1773332096609.jpg",
       "alt": "Image de test Playwright",
       "description": "Description de test ajoutée par Playwright.",
       "featured": false
