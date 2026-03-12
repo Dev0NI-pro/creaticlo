@@ -174,13 +174,6 @@
       "alt": "Image de test Playwright",
       "description": "Description de test ajoutée par Playwright.",
       "featured": false
-    },
-    {
-      "id": "1773309172474",
-      "src": "/images/gallery/gallery-1773309172474.jpg",
-      "alt": "Alt modifié par Playwright",
-      "description": "Description modifiée par Playwright.",
-      "featured": false
     }
   ]
 }
