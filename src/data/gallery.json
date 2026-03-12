@@ -1,13 +1,6 @@
 {
   "images": [
     {
-      "id": "5",
-      "src": "/images/gallery/gallery-5.jpg",
-      "alt": "Pantalon recousu",
-      "description": "Retouche complète d'un pantalon de costume, ceinture et ourlet repris avec précision.",
-      "featured": true
-    },
-    {
       "id": "6",
       "src": "/images/gallery/gallery-6.jpg",
       "alt": "Robe de soirée typée fantasy",
@@ -38,6 +31,13 @@
     {
       "id": "1773332127096",
       "src": "/images/gallery/gallery-1773332127096.jpg",
+      "alt": "Image de test Playwright",
+      "description": "Description de test ajoutée par Playwright.",
+      "featured": false
+    },
+    {
+      "id": "1773332149906",
+      "src": "/images/gallery/gallery-1773332149906.jpg",
       "alt": "Image de test Playwright",
       "description": "Description de test ajoutée par Playwright.",
       "featured": false
