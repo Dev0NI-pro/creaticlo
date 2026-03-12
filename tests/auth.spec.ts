@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const BASE_URL = 'http://localhost:4321';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:4321';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD!;
 
 test('la page login s\'affiche', async ({ page }) => {

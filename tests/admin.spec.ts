@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { TEST_IMAGE_BUFFER } from './fixtures/test-image';
 
-const BASE_URL = 'http://localhost:4321';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:4321';
 const IS_CI = !!process.env.CI;
 
 let createdImageId: string = '';
