@@ -72,6 +72,7 @@ test('modification d\'une image', async ({ page }) => {
 
   await page.goto(`${BASE_URL}/admin/dashboard`);
 
+  await page.waitForSelector(`[data-id="${createdImageId}"]`, { timeout: 15000 });
   await page.click(`[data-id="${createdImageId}"] .edit-btn`);
   await expect(page.locator('#edit-modal')).not.toHaveClass(/hidden/);
   await page.fill('#edit-alt', 'Alt modifié par Playwright');
@@ -89,6 +90,7 @@ test('suppression d\'une image avec confirmation', async ({ page }) => {
   const initialCount = await page.locator('.edit-btn').count();
 
   page.on('dialog', dialog => dialog.accept());
+  await page.waitForSelector(`[data-id="${createdImageId}"]`, { timeout: 15000 });
   await page.click(`[data-id="${createdImageId}"] .delete-btn`);
 
   await page.waitForURL(`${BASE_URL}/admin/dashboard`);
