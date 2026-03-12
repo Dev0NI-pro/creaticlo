@@ -1,6 +1,6 @@
 const GITHUB_TOKEN = import.meta.env.GH_TOKEN;
 const GITHUB_REPO = import.meta.env.GH_REPO;
-const GITHUB_BRANCH = 'netlify-prod';
+const GITHUB_BRANCH = import.meta.env.GH_BRANCH ?? 'netlify-prod';
 const API_BASE = 'https://api.github.com';
 
 // Récupère le SHA d'un fichier (nécessaire pour le modifier ou supprimer)
