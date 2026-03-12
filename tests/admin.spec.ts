@@ -39,8 +39,7 @@ test('la modale upload se ferme avec la croix', async ({ page }) => {
 });
 
 // --- CRUD ---
-test('ajout d\'une image avec alt et description', async ({ page, browserName }) => {
-  test.skip(browserName !== 'chromium', 'Test CRUD sur chromium uniquement pour éviter les race conditions');
+test('ajout d\'une image avec alt et description', async ({ page }) => {
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
   
   await page.goto(`${BASE_URL}/admin/dashboard`);
@@ -67,8 +66,7 @@ test('ajout d\'une image avec alt et description', async ({ page, browserName })
   createdImageId = data.id;
 });
 
-test('modification d\'une image', async ({ page, browserName }) => {
-  test.skip(browserName !== 'chromium', 'Test CRUD sur chromium uniquement pour éviter les race conditions');
+test('modification d\'une image', async ({ page }) => {
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
   test.skip(!createdImageId, 'Dépend du test d\'ajout');
 
@@ -82,8 +80,7 @@ test('modification d\'une image', async ({ page, browserName }) => {
   await expect(page.locator('#edit-status')).toContainText('✓', { timeout: 15000 });
 });
 
-test('suppression d\'une image avec confirmation', async ({ page, browserName }) => {
-  test.skip(browserName !== 'chromium', 'Test CRUD sur chromium uniquement pour éviter les race conditions');
+test('suppression d\'une image avec confirmation', async ({ page }) => {
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
   test.skip(!createdImageId, 'Dépend du test d\'ajout');
   
