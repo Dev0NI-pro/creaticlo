@@ -34,6 +34,13 @@
       "alt": "Robe de soirée typée fantasy",
       "description": "Création originale sur mesure, inspiration fantasy avec travail de drapé complexe.",
       "featured": true
+    },
+    {
+      "id": "1773312272061",
+      "src": "/images/gallery/gallery-1773312272061.jpg",
+      "alt": "Image de test Playwright",
+      "description": "Description de test ajoutée par Playwright.",
+      "featured": false
     }
   ]
 }
