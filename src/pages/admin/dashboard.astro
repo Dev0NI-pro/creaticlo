@@ -426,7 +426,7 @@ const images = galleryData.images;
       status.className = 'text-sm px-4 py-3 rounded-xl bg-green-50 text-green-700';
       status.textContent = '✓ Photo ajoutée ! Le site se met à jour...';
       status.classList.remove('hidden');
-      setTimeout(() => window.location.reload(), 2000);
+      setTimeout(() => window.location.reload(), 30000);
     } else {
       status.className = 'text-sm px-4 py-3 rounded-xl bg-red-50 text-red-600';
       status.textContent = '✗ Une erreur est survenue.';
@@ -519,7 +519,7 @@ const images = galleryData.images;
       status.className = 'text-sm px-4 py-3 rounded-xl bg-green-50 text-green-700';
       status.textContent = '✓ Modifications enregistrées ! Le site se met à jour...';
       status.classList.remove('hidden');
-      setTimeout(() => window.location.reload(), 2000);
+      setTimeout(() => window.location.reload(), 30000);
     } else {
       status.className = 'text-sm px-4 py-3 rounded-xl bg-red-50 text-red-600';
       status.textContent = '✗ Une erreur est survenue.';
