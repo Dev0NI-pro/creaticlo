@@ -1,13 +1,6 @@
 {
   "images": [
     {
-      "id": "2",
-      "src": "/images/gallery/gallery-2.jpg",
-      "alt": "Manteau en laine ajusté",
-      "description": "Manteau vintage années 60 entièrement restructuré et ajusté pour un rendu moderne.",
-      "featured": false
-    },
-    {
       "id": "4",
       "src": "/images/gallery/gallery-4.jpg",
       "alt": "Sac a main en daim sur une table en bois",
@@ -27,6 +20,13 @@
       "alt": "Robe de soirée typée fantasy",
       "description": "Création originale sur mesure, inspiration fantasy avec travail de drapé complexe.",
       "featured": true
+    },
+    {
+      "id": "1773332034568",
+      "src": "/images/gallery/gallery-1773332034568.jpg",
+      "alt": "Image de test Playwright",
+      "description": "Description de test ajoutée par Playwright.",
+      "featured": false
     }
   ]
 }
