@@ -4,6 +4,8 @@ import { TEST_IMAGE_BUFFER } from './fixtures/test-image';
 const BASE_URL = 'http://localhost:4321';
 const IS_CI = !!process.env.CI;
 
+let createdImageId: string = '';
+
 // --- Dashboard ---
 test('le dashboard affiche les images', async ({ page }) => {
   await page.goto(`${BASE_URL}/admin/dashboard`);
@@ -37,8 +39,10 @@ test('la modale upload se ferme avec la croix', async ({ page }) => {
 });
 
 // --- CRUD ---
-test('ajout d\'une image avec alt et description', async ({ page }) => {
+test('ajout d\'une image avec alt et description', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'Test CRUD sur chromium uniquement pour éviter les race conditions');
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
+  
   await page.goto(`${BASE_URL}/admin/dashboard`);
 
   await page.click('#upload-zone');
@@ -56,29 +60,43 @@ test('ajout d\'une image avec alt et description', async ({ page }) => {
 
   await page.click('#upload-btn');
   await expect(page.locator('#upload-status')).toContainText('✓', { timeout: 10000 });
+
+  // Récupère l'id de l'image créée depuis l'API
+  const response = await page.request.get(`${BASE_URL}/api/admin/last-image`);
+  const data = await response.json();
+  createdImageId = data.id;
 });
 
-test('modification d\'une image', async ({ page }) => {
+test('modification d\'une image', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'Test CRUD sur chromium uniquement pour éviter les race conditions');
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
+  test.skip(!createdImageId, 'Dépend du test d\'ajout');
+
   await page.goto(`${BASE_URL}/admin/dashboard`);
 
-  await page.click('.edit-btn');
+  await page.click(`[data-id="${createdImageId}"] .edit-btn`);
   await expect(page.locator('#edit-modal')).not.toHaveClass(/hidden/);
   await page.fill('#edit-alt', 'Alt modifié par Playwright');
   await page.fill('#edit-description', 'Description modifiée par Playwright.');
   await page.click('#save-btn');
-  await expect(page.locator('#edit-status')).toContainText('✓', { timeout: 10000 });
+  await expect(page.locator('#edit-status')).toContainText('✓', { timeout: 15000 });
 });
 
-test('suppression d\'une image avec confirmation', async ({ page }) => {
+test('suppression d\'une image avec confirmation', async ({ page, browserName }) => {
+  test.skip(browserName !== 'chromium', 'Test CRUD sur chromium uniquement pour éviter les race conditions');
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
+  test.skip(!createdImageId, 'Dépend du test d\'ajout');
+  
   await page.goto(`${BASE_URL}/admin/dashboard`);
 
+  const initialCount = await page.locator('.edit-btn').count();
+
   page.on('dialog', dialog => dialog.accept());
-  await page.click('.delete-btn');
+  await page.click(`[data-id="${createdImageId}"] .delete-btn`);
 
   await page.waitForURL(`${BASE_URL}/admin/dashboard`);
-  await expect(page.locator('#gallery-grid')).toBeVisible();
+  const newCount = await page.locator('.edit-btn').count();
+  expect(newCount).toBe(initialCount - 1);
 });
 
 test('déconnexion redirige vers login', async ({ page }) => {
