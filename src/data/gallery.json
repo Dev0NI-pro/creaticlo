@@ -2,7 +2,7 @@
   "images": [
     {
       "id": "2",
-      "src": "/images/gallery/gallery-1773318330968.jpg",
+      "src": "/images/gallery/gallery-2.jpg",
       "alt": "Manteau en laine ajusté",
       "description": "Manteau vintage années 60 entièrement restructuré et ajusté pour un rendu moderne.",
       "featured": false
@@ -26,27 +26,6 @@
       "src": "/images/gallery/gallery-6.jpg",
       "alt": "Robe de soirée typée fantasy",
       "description": "Création originale sur mesure, inspiration fantasy avec travail de drapé complexe.",
-      "featured": true
-    },
-    {
-      "id": "1773318330968",
-      "src": "/images/gallery/gallery-1773318330968.jpg",
-      "alt": "Rideaux blanc",
-      "description": "Rideaux blanc cassé retaillé sur mesure et réparation des anneaux en metal dechiré",
-      "featured": true
-    },
-    {
-      "id": "1773324139261",
-      "src": "/images/gallery/gallery-1773324139261.jpg",
-      "alt": "Coussin d'exterieur",
-      "description": "Matelassage d'un coussin d'exterieur",
-      "featured": true
-    },
-    {
-      "id": "1773330498528",
-      "src": "/images/gallery/gallery-1773330498528.jpg",
-      "alt": "Robe de mariée sur mesure",
-      "description": "Robe de marié en dentelle avec epaule nue",
       "featured": true
     }
   ]
