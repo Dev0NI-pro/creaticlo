@@ -29,6 +29,8 @@ async function uploadImage(page: any): Promise<string> {
 }
 
 async function reconnect(page: any) {
+  await page.waitForURL(`${BASE_URL}/admin`, { timeout: 15000 });
+  await page.waitForSelector('#password', { timeout: 15000 })
   await page.fill('#password', process.env.ADMIN_PASSWORD || '');
   await page.click('button[type="submit"]');
   await expect(page).toHaveURL(`${BASE_URL}/admin/dashboard`);
