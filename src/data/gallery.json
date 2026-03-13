@@ -1,13 +1,6 @@
 {
   "images": [
     {
-      "id": "6",
-      "src": "",
-      "alt": "Robe de soirée typée fantasy",
-      "description": "Création originale sur mesure, inspiration fantasy avec travail de drapé complexe.",
-      "featured": false
-    },
-    {
       "id": "1773393758722",
       "src": "/images/gallery/gallery-1773393758722.jpg",
       "alt": "Robe de mariée sur mesure",
@@ -48,6 +41,13 @@
       "alt": "Ajustement Rideau",
       "description": "Ajustement de rideau 200x300cm",
       "featured": false
+    },
+    {
+      "id": "1773399609705",
+      "src": "/images/gallery/gallery-1773399609705.jpg",
+      "alt": "Robe typée fantasy",
+      "description": "Création originale sur mesure, inspiration fantasy avec travail de drapé complexe.",
+      "featured": true
     }
   ]
 }
