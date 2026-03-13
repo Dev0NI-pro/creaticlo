@@ -32,9 +32,9 @@ async function waitForImageOnDashboard(page: any, id: string, shouldExist: boole
   await expect(async () => {
     await page.goto(`${BASE_URL}/admin/dashboard`);
     if (shouldExist) {
-      await expect(page.locator(`[data-id="${id}"]`)).toBeAttached();
+      await expect(page.locator(`div[data-id="${id}"]`)).toBeAttached();
     } else {
-      await expect(page.locator(`[data-id="${id}"]`)).not.toBeAttached();
+      await expect(page.locator(`div[data-id="${id}"]`)).not.toBeAttached();
     }
   }).toPass({ timeout: 120000, intervals: [5000] });
 }
