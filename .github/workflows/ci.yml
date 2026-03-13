@@ -5,7 +5,7 @@ on:
     branches: [netlify-staging]
     paths-ignore:
       - 'src/data/gallery.json'
-      - 'public/images/gallery/**'
+      - 'public/**'
 
 jobs:
   build:
