@@ -2,51 +2,9 @@
   "images": [
     {
       "id": "6",
-      "src": "/images/gallery/gallery-6.jpg",
+      "src": "",
       "alt": "Robe de soirée typée fantasy",
       "description": "Création originale sur mesure, inspiration fantasy avec travail de drapé complexe.",
-      "featured": true
-    },
-    {
-      "id": "1773332034568",
-      "src": "/images/gallery/gallery-1773332034568.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773332058790",
-      "src": "/images/gallery/gallery-1773332058790.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773332096609",
-      "src": "/images/gallery/gallery-1773332096609.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773332127096",
-      "src": "/images/gallery/gallery-1773332127096.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773332149906",
-      "src": "/images/gallery/gallery-1773332149906.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
-      "featured": false
-    },
-    {
-      "id": "1773332173266",
-      "src": "/images/gallery/gallery-1773332173266.jpg",
-      "alt": "Image de test Playwright",
-      "description": "Description de test ajoutée par Playwright.",
       "featured": false
     },
     {
@@ -68,6 +26,48 @@
       "src": "/images/gallery/gallery-1773398362430.jpg",
       "alt": "Image de test Playwright",
       "description": "Description de test ajoutée par Playwright.",
+      "featured": false
+    },
+    {
+      "id": "1773393758722",
+      "src": "/images/gallery/gallery-1773393758722.jpg",
+      "alt": "Robe de mariée sur mesure",
+      "description": "Robe de marié en dentelle, épaules nues",
+      "featured": true
+    },
+    {
+      "id": "1773393789920",
+      "src": "/images/gallery/gallery-1773393789920.jpg",
+      "alt": "Manteaux en laine",
+      "description": "Retouch d'un manteux en laine epaisse pour ajhustement des hanches",
+      "featured": true
+    },
+    {
+      "id": "1773393888966",
+      "src": "/images/gallery/gallery-1773393888966.jpg",
+      "alt": "Sac a main en cuir",
+      "description": "Conception et réalisation complete d'un sac a main en cuir. Disponible à l'achat en atelier. Prix sur demande",
+      "featured": true
+    },
+    {
+      "id": "1773393936257",
+      "src": "/images/gallery/gallery-1773393936257.jpg",
+      "alt": "Jeanréparé",
+      "description": "Réparation d'un jean denim déchiré sur le coté de la jambe",
+      "featured": true
+    },
+    {
+      "id": "1773393976366",
+      "src": "/images/gallery/gallery-1773393976366.jpg",
+      "alt": "Coussin exterieur",
+      "description": "Re matelassage d'un coussin d'extérieur",
+      "featured": true
+    },
+    {
+      "id": "1773394005000",
+      "src": "/images/gallery/gallery-1773394005000.jpg",
+      "alt": "Ajustement Rideau",
+      "description": "Ajustement de rideau 200x300cm",
       "featured": false
     }
   ]
