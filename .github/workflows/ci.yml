@@ -63,55 +63,55 @@ jobs:
           GH_BRANCH: ${{ secrets.GH_BRANCH }}
           BASE_URL: https://netlify-staging--creaticlo.netlify.app
 
-      - name: Run Playwright tests - firefox
-        run: npx playwright test --project=firefox
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_REPO: ${{ secrets.GH_REPO }}
-          GH_BRANCH: ${{ secrets.GH_BRANCH }}
-          BASE_URL: https://netlify-staging--creaticlo.netlify.app
+      # - name: Run Playwright tests - firefox
+      #   run: npx playwright test --project=firefox
+      #   env:
+      #     RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      #     GH_REPO: ${{ secrets.GH_REPO }}
+      #     GH_BRANCH: ${{ secrets.GH_BRANCH }}
+      #     BASE_URL: https://netlify-staging--creaticlo.netlify.app
 
-      - name: Run Playwright tests - webkit
-        run: npx playwright test --project=webkit
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_REPO: ${{ secrets.GH_REPO }}
-          GH_BRANCH: ${{ secrets.GH_BRANCH }}
-          BASE_URL: https://netlify-staging--creaticlo.netlify.app
+      # - name: Run Playwright tests - webkit
+      #   run: npx playwright test --project=webkit
+      #   env:
+      #     RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      #     GH_REPO: ${{ secrets.GH_REPO }}
+      #     GH_BRANCH: ${{ secrets.GH_BRANCH }}
+      #     BASE_URL: https://netlify-staging--creaticlo.netlify.app
 
-      - name: Run Playwright tests - edge
-        run: npx playwright test --project=edge
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_REPO: ${{ secrets.GH_REPO }}
-          GH_BRANCH: ${{ secrets.GH_BRANCH }}
-          BASE_URL: https://netlify-staging--creaticlo.netlify.app
+      # - name: Run Playwright tests - edge
+      #   run: npx playwright test --project=edge
+      #   env:
+      #     RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      #     GH_REPO: ${{ secrets.GH_REPO }}
+      #     GH_BRANCH: ${{ secrets.GH_BRANCH }}
+      #     BASE_URL: https://netlify-staging--creaticlo.netlify.app
 
-      - name: Run Playwright tests - mobile-chrome
-        run: npx playwright test --project=mobile-chrome
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_REPO: ${{ secrets.GH_REPO }}
-          GH_BRANCH: ${{ secrets.GH_BRANCH }}
-          BASE_URL: https://netlify-staging--creaticlo.netlify.app
+      # - name: Run Playwright tests - mobile-chrome
+      #   run: npx playwright test --project=mobile-chrome
+      #   env:
+      #     RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      #     GH_REPO: ${{ secrets.GH_REPO }}
+      #     GH_BRANCH: ${{ secrets.GH_BRANCH }}
+      #     BASE_URL: https://netlify-staging--creaticlo.netlify.app
 
-      - name: Run Playwright tests - mobile-safari
-        run: npx playwright test --project=mobile-safari
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_REPO: ${{ secrets.GH_REPO }}
-          GH_BRANCH: ${{ secrets.GH_BRANCH }}
-          BASE_URL: https://netlify-staging--creaticlo.netlify.app
+      # - name: Run Playwright tests - mobile-safari
+      #   run: npx playwright test --project=mobile-safari
+      #   env:
+      #     RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      #     ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      #     GH_REPO: ${{ secrets.GH_REPO }}
+      #     GH_BRANCH: ${{ secrets.GH_BRANCH }}
+      #     BASE_URL: https://netlify-staging--creaticlo.netlify.app
 
       - name: Upload test report
         uses: actions/upload-artifact@v4

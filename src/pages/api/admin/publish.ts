@@ -1,36 +1,45 @@
 import type { APIRoute } from 'astro';
-import { getFileContent, getFileSha, putFile, uploadImage, deleteFile } from '../../../lib/github';
+import { getFileContent, commitAll, type FileChange } from '../../../lib/github';
 
 export const POST: APIRoute = async ({ request }) => {
   const { added, updated, deleted } = await request.json();
 
   try {
-    // 1. Upload les nouvelles images
+    const changes: FileChange[] = [];
+
+    // 1. Images ajoutées
     for (const img of added) {
       if (img.image) {
-        const imagePath = `public${img.src}`;
-        await uploadImage(imagePath, img.image);
+        changes.push({
+          path: `public${img.src}`,
+          content: img.image.split(',')[1], // retire le préfixe data:image/jpeg;base64,
+          encoding: 'base64',
+        });
       }
     }
 
-    // 2. Upload les images modifiées
+    // 2. Images modifiées (si nouvelle photo)
     for (const img of updated) {
       if (img.image) {
-        const imagePath = `public${img.src}`;
-        await uploadImage(imagePath, img.image);
+        changes.push({
+          path: `public${img.src}`,
+          content: img.image.split(',')[1],
+          encoding: 'base64',
+        });
       }
     }
 
-    // 3. Supprimer les images supprimées
+    // 3. Images supprimées
     for (const img of deleted) {
-      const imagePath = `public${img.src}`;
-      const sha = await getFileSha(imagePath);
-      if (sha) {
-        await deleteFile(imagePath, `admin: suppression image ${img.id}`, sha);
-      }
+      changes.push({
+        path: `public${img.src}`,
+        content: '',
+        encoding: 'utf-8',
+        deleted: true,
+      });
     }
 
-    // 4. Lit le gallery.json actuel
+    // 4. Lit et met à jour gallery.json
     const jsonContent = await getFileContent('src/data/gallery.json');
     if (!jsonContent) {
       return new Response(JSON.stringify({ error: 'Erreur lecture gallery.json' }), { status: 500 });
@@ -38,12 +47,10 @@ export const POST: APIRoute = async ({ request }) => {
 
     const gallery = JSON.parse(jsonContent);
 
-    // 5. Applique les suppressions
     for (const img of deleted) {
       gallery.images = gallery.images.filter((i: { id: string }) => i.id !== img.id);
     }
 
-    // 6. Applique les modifications
     for (const img of updated) {
       const index = gallery.images.findIndex((i: { id: string }) => i.id === img.id);
       if (index !== -1) {
@@ -57,7 +64,6 @@ export const POST: APIRoute = async ({ request }) => {
       }
     }
 
-    // 7. Applique les ajouts
     for (const img of added) {
       gallery.images.push({
         id: img.id,
@@ -68,22 +74,27 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    // 8. Met à jour gallery.json en un seul commit
-    const sha = await getFileSha('src/data/gallery.json');
-    const updated_ok = await putFile(
-      'src/data/gallery.json',
-      JSON.stringify(gallery, null, 2),
+    // 5. Ajoute gallery.json aux changements
+    changes.push({
+      path: 'src/data/gallery.json',
+      content: JSON.stringify(gallery, null, 2),
+      encoding: 'utf-8',
+    });
+
+    // 6. UN SEUL commit pour tout
+    const success = await commitAll(
       `admin: publication ${added.length} ajout(s), ${updated.length} modification(s), ${deleted.length} suppression(s)`,
-      sha as string
+      changes
     );
 
-    if (!updated_ok) {
-      return new Response(JSON.stringify({ error: 'Erreur mise à jour gallery.json' }), { status: 500 });
+    if (!success) {
+      return new Response(JSON.stringify({ error: 'Erreur commit GitHub' }), { status: 500 });
     }
 
     return new Response(JSON.stringify({ success: true }), { status: 200 });
 
   } catch (e) {
+    console.error('publish error:', e);
     return new Response(JSON.stringify({ error: 'Erreur serveur' }), { status: 500 });
   }
 };
