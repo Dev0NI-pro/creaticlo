@@ -28,6 +28,17 @@ async function uploadImage(page: any): Promise<string> {
   return addedId;
 }
 
+async function waitForImageOnDashboard(page: any, id: string, shouldExist: boolean) {
+  await expect(async () => {
+    await page.goto(`${BASE_URL}/admin/dashboard`);
+    if (shouldExist) {
+      await expect(page.locator(`[data-id="${id}"]`)).toBeAttached();
+    } else {
+      await expect(page.locator(`[data-id="${id}"]`)).not.toBeAttached();
+    }
+  }).toPass({ timeout: 120000, intervals: [5000] });
+}
+
 async function reconnect(page: any) {
   await page.waitForURL(`${BASE_URL}/admin`, { timeout: 15000 });
   await page.waitForSelector('#password-input', { timeout: 15000 })
@@ -48,13 +59,7 @@ async function publish(page: any, waitForId?: { id: string; shouldExist: boolean
   // Attend que Netlify ait fini de déployer
   if (waitForId) {
     await reconnect(page);
-    if (waitForId.shouldExist) {
-      await expect(page.locator(`[data-id="${waitForId.id}"]`))
-        .toBeAttached({ timeout: 60000 });
-    } else {
-      await expect(page.locator(`[data-id="${waitForId.id}"]`))
-        .not.toBeAttached({ timeout: 60000 });
-    }
+    await waitForImageOnDashboard(page, waitForId.id, waitForId.shouldExist);
   } else {
     await reconnect(page);
   }
