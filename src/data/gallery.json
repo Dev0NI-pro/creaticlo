@@ -1,31 +1,17 @@
 {
   "images": [
     {
-      "id": "2",
-      "src": "/images/gallery/gallery-2.jpg",
-      "alt": "Manteau en laine ajusté",
-      "description": "Manteau vintage années 60 entièrement restructuré et ajusté pour un rendu moderne.",
-      "featured": false
-    },
-    {
-      "id": "4",
-      "src": "/images/gallery/gallery-4.jpg",
-      "alt": "Sac a main en daim sur une table en bois",
-      "description": "Sac à main en daim restauré, coutures refaites et doublure intérieure remplacée.",
+      "id": "1773409207952",
+      "src": "/images/gallery/gallery-1773409207952.jpg",
+      "alt": "Robe fantasy",
+      "description": "Robe à inspiration fantasy, avec un travail de drapé complexe",
       "featured": true
     },
     {
-      "id": "5",
-      "src": "/images/gallery/gallery-5.jpg",
-      "alt": "Pantalon recousu",
-      "description": "Retouche complète d'un pantalon de costume, ceinture et ourlet repris avec précision.",
-      "featured": true
-    },
-    {
-      "id": "6",
-      "src": "/images/gallery/gallery-6.jpg",
-      "alt": "Robe de soirée typée fantasy",
-      "description": "Création originale sur mesure, inspiration fantasy avec travail de drapé complexe.",
+      "id": "1773409426987",
+      "src": "/images/gallery/gallery-1773409426987.jpg",
+      "alt": "Coussin exterieur",
+      "description": "Re matelassage d'un coussin d'extérieur, avec ajout d'un traitement imperméabilisant",
       "featured": true
     }
   ]
