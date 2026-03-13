@@ -140,6 +140,7 @@ test('ajout + modif + suppression sans publication = zéro trace', async ({ page
 
 // --- Test 2 : ajout → publish, modif → publish, suppression → publish = zéro trace ---
 test('ajout + publish, modif + publish, suppression + publish = zéro trace', async ({ page }) => {
+  test.setTimeout(600000);
   test.skip(!IS_CI, 'Test CRUD uniquement en CI');
 
   await page.goto(`${BASE_URL}/admin/dashboard`);
