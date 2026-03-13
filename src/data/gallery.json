@@ -13,13 +13,6 @@
       "alt": "Coussin exterieur",
       "description": "Re matelassage d'un coussin d'extérieur, avec ajout d'un traitement imperméabilisant",
       "featured": true
-    },
-    {
-      "id": "1773416130239",
-      "src": "/images/gallery/gallery-1773416130239.jpg",
-      "alt": "Alt modifié par Playwright",
-      "description": "Description modifiée par Playwright.",
-      "featured": false
     }
   ]
 }
